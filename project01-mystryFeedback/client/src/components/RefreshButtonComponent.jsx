@@ -1,14 +1,12 @@
 import refreshLogo from "../../assets/refreshLogo.svg";
 import useGetMessage from "../hooks/useGetMessage";
-import useUserData from "../hooks/useUserData";
 
-function RefreshButton() {
+function RefreshButton({username}) {
   const { getMessages } = useGetMessage();
-  const { userData } = useUserData();
 
   async function handleReloading() {
-    if (userData.username) {
-      await getMessages(userData.username);
+    if (username) {
+      await getMessages(username);
     }
   }
 
