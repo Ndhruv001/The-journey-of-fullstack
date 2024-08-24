@@ -1,7 +1,7 @@
 
 function Monthly() {
   return (
-    <div>Monthly</div>
+    <div className="text-white text-lg text-center">No data available</div>
   )
 }
 

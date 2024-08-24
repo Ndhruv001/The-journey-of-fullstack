@@ -1,8 +1,14 @@
+import Header from '@/components/Header';
+import DataTable from './table/DataTable';
+
 
 function Customers() {
   return (
-    <div>Customers</div>
+    <>
+      <Header title={"Customers"} subtitle={"List of customers"} />
+      <DataTable />
+    </>
   )
 }
 
-export default Customers
+export default Customers;

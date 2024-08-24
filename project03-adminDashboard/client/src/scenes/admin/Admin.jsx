@@ -1,7 +1,7 @@
 
 function Admin() {
   return (
-    <div>Admin</div>
+    <div className="text-white text-lg text-center">No data available</div>
   )
 }
 

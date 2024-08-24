@@ -1,8 +1,7 @@
-
 function Performance() {
   return (
-    <div>Performance</div>
-  )
+    <div className="text-white text-lg text-center">No data available</div>
+  );
 }
 
-export default Performance
+export default Performance;
