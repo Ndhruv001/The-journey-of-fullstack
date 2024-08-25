@@ -1,7 +1,7 @@
-import axiosInstance from '@/lib/axiosInstance';
+import axiosInstance from "@/lib/axiosInstance";
 
-async function fetchTransactions(){
-    return await axiosInstance.get('/client/transactions');
+async function fetchTransactions() {
+  return await axiosInstance.get("/client/transactions");
 }
 
 export default fetchTransactions;

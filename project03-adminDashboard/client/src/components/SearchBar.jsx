@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 function SearchBar() {
   return (
@@ -10,6 +10,6 @@ function SearchBar() {
       <MagnifyingGlassIcon width={20} />
     </div>
   );
-};
+}
 
 export default SearchBar;

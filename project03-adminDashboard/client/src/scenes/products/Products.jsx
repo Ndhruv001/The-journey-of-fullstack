@@ -7,16 +7,12 @@ import Header from "@/components/Header";
 function Products() {
   const { data, isLoading, isError, error } = useGetProducts();
 
-  if(isLoading){
-    return (
-      <LoadingPage />
-    )
+  if (isLoading) {
+    return <LoadingPage />;
   }
 
-  if(isError){
-    return (
-      <ErrorResponse error={error} />
-    )
+  if (isError) {
+    return <ErrorResponse error={error} />;
   }
 
   return (

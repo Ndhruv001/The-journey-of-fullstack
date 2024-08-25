@@ -1,13 +1,10 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
-import useGetDailySales from "../hooks/useGetDailySales";
-import SelectionDropdown from "../SelectionDropdown";
-import { useState } from "react";
+import useGetDailySales from "../../overview/hooks/useGetDailySales";
 import { format } from "date-fns";
 
-function OverviewLineChart() {
-  const [selectedOption, setSelectedOption] = useState("sales");
+function LineCharts() {
   const { data, isLoading, isError, error } = useGetDailySales();
 
   const formattedData = data?.map((item) => ({
@@ -31,15 +28,11 @@ function OverviewLineChart() {
 
   return (
     <>
-      <SelectionDropdown
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
-      <LineChart
-        width={window.innerWidth - 250}
-        height={window.innerHeight - 250}
+      <AreaChart
+        width={700}
+        height={310}
         data={formattedData}
-        margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+        margin={{ top: 10, right: 2, left: 2, bottom: 1 }}
       >
         <XAxis dataKey="day" stroke="#cccccc" />
         <YAxis stroke="#cccccc" />
@@ -52,15 +45,15 @@ function OverviewLineChart() {
           cursor={{ stroke: "rgba(255, 255, 255, 0.2)" }}
         />
         <Legend />
-        <Line
+        <Area
           type="monotone"
-          dataKey={selectedOption === "units" ? "total_units" : "total_sales"}
+          dataKey="total_sales"
           stroke="#8884d8"
           strokeWidth={2}
         />
-      </LineChart>
+      </AreaChart>
     </>
   );
 }
 
-export default OverviewLineChart;
+export default LineCharts;

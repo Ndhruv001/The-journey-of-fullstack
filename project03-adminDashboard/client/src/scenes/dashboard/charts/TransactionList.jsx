@@ -1,14 +1,24 @@
-import { useMemo } from "react";
-import useGetCustomers from "../hooks/useGetCustomers";
-import LoadingPage from "@/components/LoadingPage";
-import ErrorResponse from "@/components/ErrorResponse";
 import { useTable } from "react-table";
-import COLUMNS from "./columns";
+import useGetTransactions from "@/scenes/transactions/hooks/useGetTransactions";
+import ErrorResponse from "@/components/ErrorResponse";
+import LoadingPage from "@/components/LoadingPage";
+import { format } from "date-fns";
+import COLUMNS from "@/scenes/transactions/table/columns";
+import { useMemo } from "react";
 
-function DataTable() {
-  const { data, isLoading, isError, error } = useGetCustomers();
+function TransactionLists() {
+  const { data, isLoading, isError, error } = useGetTransactions();
 
-  const memoizeData = useMemo(() => data || [], [data]); // Use an empty array as a fallback
+  const memoizeData = useMemo(() => {
+    if (!data) return [];
+
+    return data.map((customer) => {
+      return {
+        ...customer,
+        ["order_date"]: format(new Date(customer.order_date), "dd, MMMM, yyyy"),
+      };
+    });
+  }, [data]);
   const columns = useMemo(() => COLUMNS, []);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -83,4 +93,4 @@ function DataTable() {
   );
 }
 
-export default DataTable;
+export default TransactionLists;

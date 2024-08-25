@@ -1,6 +1,5 @@
-import Header from '@/components/Header';
-import DataTable from './table/DataTable';
-
+import Header from "@/components/Header";
+import DataTable from "./table/DataTable";
 
 function Customers() {
   return (
@@ -8,7 +7,7 @@ function Customers() {
       <Header title={"Customers"} subtitle={"List of customers"} />
       <DataTable />
     </>
-  )
+  );
 }
 
 export default Customers;

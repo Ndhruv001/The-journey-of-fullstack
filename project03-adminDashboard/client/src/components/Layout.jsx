@@ -26,8 +26,8 @@ function Layout() {
         }`}
       >
         <Navbar onToggleSidebar={toggleSidebar} />
-        <div className="m-5 h-auto text-gray-200 ">
-            <Outlet />
+        <div className="m-5 h-auto   text-gray-200 ">
+          <Outlet />
         </div>
       </div>
     </div>

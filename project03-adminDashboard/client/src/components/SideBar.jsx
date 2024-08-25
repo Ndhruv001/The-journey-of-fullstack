@@ -21,10 +21,15 @@ function SideBar() {
       </div>
 
       {/* Dashboard Section */}
-        <NavLink to='/' className={({isActive}) => `flex items-center gap-5 text-sm cursor-pointer py-2 px-3 rounded mb-6 ${isActive ? "bg-gray-400 text-yellow-400" : "hover:bg-gray-400 hover:text-yellow-400"}`}>
-          <HomeIcon width={24} />
-          <span className="text-lg">Dashboard</span>
-        </NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `flex items-center gap-5 text-sm cursor-pointer py-2 px-3 rounded mb-6 ${isActive ? "bg-gray-400 text-yellow-400" : "hover:bg-gray-400 hover:text-yellow-400"}`
+        }
+      >
+        <HomeIcon width={24} />
+        <span className="text-lg">Dashboard</span>
+      </NavLink>
 
       {/* Sections */}
       <div className="mt-6 w-full">

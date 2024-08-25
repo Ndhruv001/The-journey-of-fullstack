@@ -1,6 +1,5 @@
-import Header from '@/components/Header';
-import DataTable from './table/DataTable';
-
+import Header from "@/components/Header";
+import DataTable from "./table/DataTable";
 
 function Transactions() {
   return (
@@ -8,7 +7,7 @@ function Transactions() {
       <Header title={"Transactions"} subtitle={"Entire list of transactions"} />
       <DataTable />
     </>
-  )
+  );
 }
 
 export default Transactions;

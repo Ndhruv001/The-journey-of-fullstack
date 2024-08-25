@@ -1,9 +1,9 @@
-import { PieChart, Pie, Tooltip, Cell } from "recharts";
-import useGetSalesByCategory from "../hooks/useGetSalesByCategory";
+import useGetSalesByCategory from "../../breakdown/hooks/useGetSalesByCategory";
+import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
 
-function BreakdownPieChart() {
+function PieCharts() {
   const { data, isLoading, isError, error } = useGetSalesByCategory();
 
   const formatedData = data?.map((item) => ({
@@ -12,26 +12,6 @@ function BreakdownPieChart() {
   }));
 
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#d0ed57"];
-
-  const renderLabel = ({ cx, cy, midAngle, outerRadius, name }) => {
-    const RADIAN = Math.PI / 180;
-    const radius = outerRadius + 10;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="#FFFF00"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-        fontSize={12}
-      >
-        {name}
-      </text>
-    );
-  };
 
   if (isLoading) {
     return <LoadingPage />;
@@ -42,16 +22,16 @@ function BreakdownPieChart() {
   }
 
   return (
-    <PieChart width={900} height={630}>
+    <PieChart width={350} height={400}>
       <Pie
         data={formatedData}
         dataKey="total_sales"
         nameKey="category_name"
-        cx="65%"
+        cx="55%"
         cy="50%"
-        outerRadius={200}
+        outerRadius={90}
         fill="#82ca9d"
-        label={renderLabel}
+        label
       >
         {formatedData?.map((_, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -65,8 +45,9 @@ function BreakdownPieChart() {
         itemStyle={{ color: "#333" }}
         cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
       />
+      <Legend />
     </PieChart>
   );
 }
 
-export default BreakdownPieChart;
+export default PieCharts;

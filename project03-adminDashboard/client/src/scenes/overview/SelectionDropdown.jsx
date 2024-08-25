@@ -1,6 +1,4 @@
-
 function SelectionDropdown({ selectedOption, setSelectedOption }) {
-
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };

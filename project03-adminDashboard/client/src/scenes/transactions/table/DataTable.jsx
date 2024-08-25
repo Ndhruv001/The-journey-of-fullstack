@@ -1,4 +1,4 @@
-import ColumnVisibilityToggle from '@/components/ColumnVisibilityToggle'
+import ColumnVisibilityToggle from "@/components/ColumnVisibilityToggle";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import useGetTransactions from "../hooks/useGetTransactions";
 import ErrorResponse from "@/components/ErrorResponse";

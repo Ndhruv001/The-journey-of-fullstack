@@ -16,7 +16,7 @@ function UserProfile() {
         alt="User Profile"
         className="h-12 w-12 rounded-full object-cover mr-3"
       />
-      
+
       <div className="relative  bottom-0">
         <h1 className="font-bold">Jane Doe</h1>
         <button className="focus:outline-none" onClick={toggleDropdown}>

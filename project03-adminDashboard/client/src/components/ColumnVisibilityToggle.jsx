@@ -15,7 +15,7 @@ function ColumnVisibilityToggle({ allColumns }) {
         className="inline-flex justify-center w-full rounded-md border border-gray-700 shadow-sm px-4 py-2 bg-gray-800 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none"
       >
         Toggle Columns
-        <EllipsisVerticalIcon  width={20}/>
+        <EllipsisVerticalIcon width={20} />
       </button>
 
       {isDropdownOpen && (

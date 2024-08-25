@@ -1,7 +1,7 @@
-import axiosInstance from '@/lib/axiosInstance';
+import axiosInstance from "@/lib/axiosInstance";
 
-async function fetchDailySales(){
-    return await axiosInstance.get('/sales/overview');
+async function fetchDailySales() {
+  return await axiosInstance.get("/sales/overview");
 }
 
 export default fetchDailySales;
