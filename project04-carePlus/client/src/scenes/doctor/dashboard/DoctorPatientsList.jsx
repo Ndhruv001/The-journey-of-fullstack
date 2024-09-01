@@ -24,7 +24,6 @@ function DoctorPatientsList() {
             <td className="border p-2">Diabetes</td>
             <td className="border p-2">
               <Button color="green">View</Button>
-              <Button>Edit</Button>
             </td>
           </tr>
         </tbody>

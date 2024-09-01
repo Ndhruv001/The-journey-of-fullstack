@@ -1,13 +1,11 @@
 import Container from "@/components/Container";
+import Searchbar from "@/components/Searchbar";
 import Button from "@/components/Button";
 
 function DoctorAppointmentsManagement() {
   return (
     <Container>
-      <div className="flex justify-end mb-4">
-        <Button color="green">Add New Appointment</Button>
-      </div>
-      
+      <Searchbar />
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-green-100 text-gray-700">
@@ -25,7 +23,7 @@ function DoctorAppointmentsManagement() {
             <td className="border p-2">Jane Smith</td>
             <td className="border p-2">Follow-up</td>
             <td className="border p-2">
-              <Button color="green">Reschedule</Button>
+              <Button color="green">Accept</Button>
               <Button color="red">Cancel</Button>
             </td>
           </tr>
