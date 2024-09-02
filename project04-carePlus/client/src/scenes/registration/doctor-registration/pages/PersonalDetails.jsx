@@ -17,11 +17,6 @@ function PersonalDetails() {
           />
         </div>
         <div className="mb-4">
-          <Label>Date of Birth</Label>
-          <Input type="date" bg="bg-gray-100" rounded={false} />
-        </div>
-
-        <div className="mb-4">
           <Label>Email</Label>
           <Input
             placeholder="Enter your email"
@@ -29,6 +24,7 @@ function PersonalDetails() {
             rounded={false}
           />
         </div>
+
         <div className="mb-4">
           <Label>Phone Number</Label>
           <Input
@@ -37,6 +33,11 @@ function PersonalDetails() {
             bg="bg-gray-100"
             rounded={false}
           />
+        </div>
+        
+        <div className="mb-4">
+          <Label>Date of Birth</Label>
+          <Input type="date" bg="bg-gray-100" rounded={false} />
         </div>
 
         <div className="mb-4">
@@ -47,16 +48,6 @@ function PersonalDetails() {
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-        </div>
-
-        <div className="mb-4">
-          <Label>Address</Label>
-          <Input
-            type="text"
-            placeholder="Enter your address"
-            bg="bg-gray-100"
-            rounded={false}
-          />
         </div>
       </form>
     </>

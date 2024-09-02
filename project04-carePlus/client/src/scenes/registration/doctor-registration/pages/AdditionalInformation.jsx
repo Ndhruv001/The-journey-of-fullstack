@@ -14,21 +14,18 @@ function AdditionalInformation() {
         </div>
 
         <div className="mb-4">
-          <Label>Emergency Contact Name</Label>
-          <Input
-            placeholder="Emergency contact name"
-            rounded={false}
-            bg="bg-gray-100"
-          />
+          <Label>Identity Type</Label>
+          <select className="w-full p-2 border border-gray-300  focus:outline-none pl-4 bg-gray-100">
+            <option value="">Select Identity Type</option>
+            <option value="national-id">Aadhar Card</option>
+            <option value="driver-license">Driver&apos;s License</option>
+            <option value="pan-card">Pan Card</option>
+            <option value="passport">Passport</option>
+          </select>
         </div>
-        <div className="mb-4">
-          <Label>Emergency Contact Number</Label>
-          <Input
-            type="tel"
-            placeholder="Emergency contact number"
-            rounded={false}
-            bg="bg-gray-100"
-          />
+        <div className="mb-6">
+          <Label>Upload Document</Label>
+          <Input type="file" bg="bg-gray-100" rounded={false} />
         </div>
       </form>
     </>

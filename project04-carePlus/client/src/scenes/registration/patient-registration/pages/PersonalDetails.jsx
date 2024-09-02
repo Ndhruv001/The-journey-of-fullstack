@@ -18,17 +18,17 @@ function PersonalDetails() {
           </select>
         </div>
         <div className="mb-4">
-          <Label>Address</Label>
+          <Label>State</Label>
           <Input
-            placeholder="Enter your address"
+            placeholder="Enter your state"
             bg="bg-gray-100"
             rounded={false}
           />
         </div>
         <div className="mb-6">
-          <Label>Occupation</Label>
+          <Label>City</Label>
           <Input
-            placeholder="Enter your occupation"
+            placeholder="Enter your city"
             bg="bg-gray-100"
             rounded={false}
           />
