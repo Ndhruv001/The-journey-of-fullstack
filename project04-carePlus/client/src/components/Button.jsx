@@ -8,7 +8,7 @@ function Button({ color, onClick, disabled = false, children }) {
 
   const colorClass = colors[color] || colors["blue"];
 
-  const baseClasses = "text-white px-4 py-1 rounded mr-1";
+  const baseClasses = "text-white px-4 py-1 rounded mr-1 ";
 
   const disabledClasses = "bg-gray-400 cursor-not-allowed";
 
