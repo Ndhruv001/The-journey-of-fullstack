@@ -7,11 +7,11 @@ import Login from "./login/LoginPage";
 import LandingPage from "./landing-page/LandingPage";
 
 export {
-    AboutUs,
-    ContactUs,
-    NotFound,
-    PatientRegistration,
-    DoctorRegistration,
-    Login,
-    LandingPage,
+  AboutUs,
+  ContactUs,
+  NotFound,
+  PatientRegistration,
+  DoctorRegistration,
+  Login,
+  LandingPage,
 };

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import ProfileImage from "@/assets/profile-image.jpeg";
 import {
   ArrowRightEndOnRectangleIcon,

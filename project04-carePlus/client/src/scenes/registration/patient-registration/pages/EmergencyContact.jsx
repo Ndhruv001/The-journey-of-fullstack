@@ -19,10 +19,12 @@ function EmergencyContact() {
           placeholder="Enter name"
           bg="bg-gray-100"
           rounded={false}
-          defaultValue={defaultValue["emergency-name"] || ""}
-          {...register("emergency-name", { required: "Name is required" })}
+          defaultValue={defaultValue["emergency_contact_name"] || ""}
+          {...register("emergency_contact_name", {
+            required: "Name is required",
+          })}
         />
-        <Error message={errors["emergency-name"]?.message} />
+        <Error message={errors["emergency_contact_name"]?.message} />
       </div>
       <div className="mb-4">
         <Label>Emergency Phone Number</Label>
@@ -31,8 +33,8 @@ function EmergencyContact() {
           placeholder="Enter Phone No."
           bg="bg-gray-100"
           rounded={false}
-          defaultValue={defaultValue["emergency-phone-number"] || ""}
-          {...register("emergency-phone-number", {
+          defaultValue={defaultValue["emergency_contact_number"] || ""}
+          {...register("emergency_contact_number", {
             required: "Phone number is required",
             pattern: {
               value: /^[0-9]{10}$/,
@@ -40,7 +42,7 @@ function EmergencyContact() {
             },
           })}
         />
-        <Error message={errors["emergency-phone-number"]?.message} />
+        <Error message={errors["emergency_contact_number"]?.message} />
       </div>
     </>
   );

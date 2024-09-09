@@ -11,9 +11,8 @@ function DoctorRegistration() {
   const methods = useForm();
   const { isDirty, isValid } = methods.formState;
 
-
   function prevStep(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     setStep((prev) => prev - 1);
   }
 
@@ -49,8 +48,8 @@ function DoctorRegistration() {
                 </Button>
               )}
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={step === 4 && (!isDirty || !isValid)}
               >
                 {step < 4 ? "Next" : "Submit"}

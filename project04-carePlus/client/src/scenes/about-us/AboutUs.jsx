@@ -16,7 +16,7 @@ function AboutUs() {
         reliable, secure, and user-friendly. Thank you for choosing us as your
         trusted healthcare partner.
       </p>
-      
+
       {/* Aligned to the right, immediately after the main content */}
       <div className=" text-center mt-4 ">
         <p className="text-gray-700">- Dhruv Shukla</p>

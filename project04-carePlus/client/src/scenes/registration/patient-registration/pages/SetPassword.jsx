@@ -51,9 +51,12 @@ function SetPassword() {
       </div>
       <div className="mb-4">
         <Label>
-          <input type="checkbox"  {...register('consent', {
-            required: "Must be checked before submitting the form"
-          })}/>
+          <input
+            type="checkbox"
+            {...register("consent", {
+              required: "Must be checked before submitting the form",
+            })}
+          />
           <span className="ml-2 text-gray-700">
             I agree to the terms and conditions
           </span>

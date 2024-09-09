@@ -13,5 +13,5 @@ export {
   DoctorProfile,
   DoctorActivePrescriptions,
   DoctorMedicalRocordsAccess,
-  DoctorAppointmentsManagement
+  DoctorAppointmentsManagement,
 };

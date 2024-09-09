@@ -12,7 +12,10 @@ function PatientNotifications() {
 
       <DataContainer>
         <H4>Reminder</H4>
-        <p>Your appointment with Dr. John Doe is scheduled for 2024-09-05 at 10:00 AM.</p>
+        <p>
+          Your appointment with Dr. John Doe is scheduled for 2024-09-05 at
+          10:00 AM.
+        </p>
       </DataContainer>
 
       <DataContainer>

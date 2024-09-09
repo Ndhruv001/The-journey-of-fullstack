@@ -1,6 +1,6 @@
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Label from '@/components/Label';
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Label from "@/components/Label";
 
 function ContactUs() {
   return (
@@ -13,11 +13,11 @@ function ContactUs() {
       <form className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <div className="mb-4">
           <Label>Name</Label>
-          <Input placeholder = "Your name" rounded = {false} bg="bg-gray-100" />
+          <Input placeholder="Your name" rounded={false} bg="bg-gray-100" />
         </div>
         <div className="mb-4">
           <Label>Email</Label>
-          <Input placeholder="Your Email" rounded = {false} bg="bg-gray-100" />
+          <Input placeholder="Your Email" rounded={false} bg="bg-gray-100" />
         </div>
         <div className="mb-4">
           <Label>Message</Label>

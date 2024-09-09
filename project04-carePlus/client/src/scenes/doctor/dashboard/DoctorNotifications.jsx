@@ -9,7 +9,7 @@ function DoctorNotifications() {
         <H4>Alert: New Patient Added</H4>
         <p>John Doe has been assigned to your care.</p>
       </DataContainer>
-      
+
       <DataContainer>
         <H4>Update: Appointment Reminder</H4>
         <p>

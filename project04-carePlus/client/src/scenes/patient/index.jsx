@@ -5,7 +5,6 @@ import PatientAppointments from "./dashboard/PatientAppointments";
 import PatientProfile from "./dashboard/PatientProfile";
 import PatientLayout from "./PatientLayout";
 
-
 export {
   PatientNotifications,
   PatientPrescriptions,

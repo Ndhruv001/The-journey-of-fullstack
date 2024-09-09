@@ -1,15 +1,36 @@
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useForm, FormProvider } from "react-hook-form";
 import BasicInformations from "./pages/BasicInformations";
 import EmergencyContact from "./pages/EmergencyContact";
 import PersonalDetails from "./pages/PersonalDetails";
+import axiosInstance from "@/lib/config/axiosInstance";
+import formatDateOfBirth from "@/lib/helpers/formatDateOfBirth";
 import SetPassword from "./pages/SetPassword";
 import Button from "@/components/Button";
-import { useForm, FormProvider } from "react-hook-form";
-import { useState } from "react";
 
 function PatientRegistration() {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
   const methods = useForm();
   const { isDirty, isValid } = methods.formState;
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => axiosInstance.post("/patient/auth/register", data),
+    onSuccess: () => {
+      toast.success("Registration successfull! redirect to login...");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    },
+    onError: (error) => {
+      console.log("🚀 ~ PatientRegistration ~ error:", error);
+      toast.error("Registration failed! Please try again.");
+    },
+  });
 
   function prevStep(e) {
     e.preventDefault();
@@ -24,7 +45,8 @@ function PatientRegistration() {
     if (step < 4) {
       nextStep();
     } else {
-      console.log("Final submission with data:", data);
+      const formatedDOB = formatDateOfBirth(data.dob);
+      mutate({ ...data, dob: formatedDOB });
     }
   }
 

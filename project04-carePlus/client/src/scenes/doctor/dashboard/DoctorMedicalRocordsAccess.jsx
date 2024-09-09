@@ -8,7 +8,7 @@ function DoctorMedicalRecordsAccess() {
   return (
     <Container>
       <Searchbar />
-      
+
       <DataContainer>
         <H4>Patient: John Doe</H4>
         <p>Condition: Diabetes</p>

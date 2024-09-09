@@ -2,7 +2,7 @@ import SidebarLayout from "@/components/SidebarLayout";
 import SidebarItem from "@/components/SidebarItem";
 import {
   CalendarDaysIcon,
-  UserGroupIcon ,
+  UserGroupIcon,
   DocumentTextIcon,
   ClipboardDocumentCheckIcon,
   UserCircleIcon,
@@ -18,7 +18,7 @@ function DoctorSidebar() {
       </SidebarItem>
 
       <SidebarItem path="patients-list">
-        <UserGroupIcon  width={20} />
+        <UserGroupIcon width={20} />
         <span>Patients List</span>
       </SidebarItem>
 

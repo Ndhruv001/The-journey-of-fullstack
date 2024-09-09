@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function SidebarItem({path, children }) {
+function SidebarItem({ path, children }) {
   return (
     <li>
       <NavLink

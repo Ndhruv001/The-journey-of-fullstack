@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
-import Input from '@/components/Input';
-import Label from '@/components/Label';
-import Button from '@/components/Button';
-
+import Input from "@/components/Input";
+import Label from "@/components/Label";
+import Button from "@/components/Button";
 
 function LoginPage() {
   return (
@@ -14,15 +13,24 @@ function LoginPage() {
         <form>
           <div className="mb-4">
             <Label>Email</Label>
-            <Input placeholder="Enter your email" bg="bg-gray-100" rounded={false} />
+            <Input
+              placeholder="Enter your email"
+              bg="bg-gray-100"
+              rounded={false}
+            />
           </div>
           <div className="mb-6">
             <Label>Password</Label>
-            <Input type="password" placeholder="Enter your password" bg="bg-gray-100" rounded={false} />
+            <Input
+              type="password"
+              placeholder="Enter your password"
+              bg="bg-gray-100"
+              rounded={false}
+            />
           </div>
           <Button>Login</Button>
         </form>
-        <div className="text-center mt-4"> 
+        <div className="text-center mt-4">
           <p className="text-gray-600">
             New to CarePlus?{" "}
             <NavLink to="/" className="text-blue-700 hover:underline">

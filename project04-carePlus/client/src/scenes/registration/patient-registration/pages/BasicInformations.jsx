@@ -63,8 +63,8 @@ function BasicInformations() {
           placeholder="Enter your Phone No."
           bg="bg-gray-100"
           rounded={false}
-          defaultValue={defaultValue["phone-number"] || ""}
-          {...register("phone-number", {
+          defaultValue={defaultValue["phone_number"] || ""}
+          {...register("phone_number", {
             required: "Phone number is required",
             pattern: {
               value: /^[0-9]{10}$/,
@@ -72,7 +72,7 @@ function BasicInformations() {
             },
           })}
         />
-        <Error message={errors["phone-number"]?.message} />
+        <Error message={errors["phone_number"]?.message} />
       </div>
     </>
   );

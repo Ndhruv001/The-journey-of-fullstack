@@ -8,7 +8,6 @@ function DoctorProfile() {
   return (
     <ProfileLayout profileImage={ProfileImage}>
       <form className="space-y-6 flex flex-col">
-
         <div className="flex gap-3 w-full">
           <div className="w-3/6 ">
             <Label>First Name</Label>
@@ -61,9 +60,7 @@ function DoctorProfile() {
         </div>
 
         <div className="flex justify-end w-full gap-3">
-          <Button >
-            Edit
-          </Button>
+          <Button>Edit</Button>
         </div>
       </form>
     </ProfileLayout>
@@ -71,4 +68,3 @@ function DoctorProfile() {
 }
 
 export default DoctorProfile;
- 
