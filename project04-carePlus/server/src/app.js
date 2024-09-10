@@ -1,18 +1,28 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import config from "../config/config.js";
 
 const app = express();
 
-// MIDDLWARES INJECTED
-app.use(cors());
+const corsOptions = {
+  origin: config.frontendOrigin, 
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 
 // ROUTES
-// app.use('api/v1/patient')
-// app.use('api/v1/doctor')
+import doctorRoutes from "./routes/doctor/doctorRoutes.js";
+import patientRoutes from "./routes/patient/patientRoutes.js";
+import loginRoutes from "./routes/loginRoutes.js";
+
+app.use(`${config.baseURL}/${config.apiVersion}/user`, loginRoutes);
+app.use(`${config.baseURL}/${config.apiVersion}/doctor`, doctorRoutes);
+app.use(`${config.baseURL}/${config.apiVersion}/patient`, patientRoutes);
 // app.use('api/v1/admin')
 
 export default app;
