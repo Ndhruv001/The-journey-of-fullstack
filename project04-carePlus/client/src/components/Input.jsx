@@ -6,7 +6,7 @@ const Input = forwardRef(
       type = "text",
       placeholder = "",
       rounded = true,
-      bg = "",
+      bg = "", 
       autoComplete,
       ...props
     },
@@ -19,7 +19,12 @@ const Input = forwardRef(
         placeholder={placeholder}
         autoComplete={autoComplete}
         {...props}
-        className={`w-full p-2 border border-gray-300 dark:border-gray-400 focus:outline-none pl-4 ${rounded ? "rounded-3xl" : "rounded-md"} ${bg} dark:bg-gray-900 dark:border-gray-400`}
+        className={`w-full p-2 border border-gray-300 dark:border-gray-400 focus:outline-none pl-4  dark:bg-gray-900
+          ${rounded ? "rounded-3xl" : "rounded-md"} 
+          ${bg} 
+          text-black dark:text-white 
+          dark:placeholder-gray-400 
+          dark:appearance-none`} 
       />
     );
   }

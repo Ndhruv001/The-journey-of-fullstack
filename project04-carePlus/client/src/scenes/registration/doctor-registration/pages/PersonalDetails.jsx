@@ -50,8 +50,8 @@ function PersonalDetails() {
           placeholder="Enter your phone number"
           bg="bg-gray-100"
           rounded={false}
-          defaultValue={defaultValue["phone-number"] || ""}
-          {...register("phone-number", {
+          defaultValue={defaultValue["phone_number"] || ""}
+          {...register("phone_number", {
             required: "Phone number is required",
             pattern: {
               value: /^[0-9]{10}$/,
@@ -59,7 +59,7 @@ function PersonalDetails() {
             },
           })}
         />
-        <Error message={errors["phone-number"]?.message} />
+        <Error message={errors["phone_number"]?.message} />
       </div>
 
       <div className="mb-4">
@@ -77,16 +77,16 @@ function PersonalDetails() {
       <div className="mb-4">
         <Label>Gender</Label>
         <select
-          className="w-full p-2 border border-gray-300 focus:outline-none pl-4 bg-gray-100"
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["gender"] || ""}
           {...register("gender", {
             required: "Gender is required",
           })}
         >
           <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
         </select>
         <Error message={errors["gender"]?.message} />
       </div>

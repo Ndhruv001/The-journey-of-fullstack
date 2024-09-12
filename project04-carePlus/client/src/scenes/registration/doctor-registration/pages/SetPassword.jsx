@@ -24,7 +24,12 @@ function SetPassword() {
           rounded={false}
           autoComplete="password"
           defaultValue={defaultValue["password"] || ""}
-          {...register("password", { required: "Password is required" })}
+          {...register("password", { required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+           })}
         />
         <Error message={errors["password"]?.message} />
       </div>
@@ -37,13 +42,13 @@ function SetPassword() {
           bg="bg-gray-100"
           rounded={false}
           autoComplete="confirm-password"
-          defaultValue={defaultValue["confirm-password"] || ""}
-          {...register("confirm-password", {
+          defaultValue={defaultValue["confirm_password"] || ""}
+          {...register("confirm_password", {
             validate: (value) =>
               value === watch("password") || "Passwords do not match",
           })}
         />
-        <Error message={errors["confirm-password"]?.message} />
+        <Error message={errors["confirm_password"]?.message} />
       </div>
 
       <div className="mb-4">

@@ -21,20 +21,20 @@ function AdditionalInformation() {
           type="file"
           rounded={false}
           bg="bg-gray-100"
-          {...register("profile-picture", {
+          {...register("profile_picture", {
             required: "Profile picture is required",
             validate: (files) => validateFileInput(files),
           })}
         />
-        <Error message={errors["profile-picture"]?.message} />
+        <Error message={errors["profile_picture"]?.message} />
       </div>
 
       <div className="mb-4">
         <Label>Identity Type</Label>
         <select
-          className="w-full p-2 border border-gray-300 focus:outline-none pl-4 bg-gray-100"
-          defaultValue={defaultValue["identity-type"] || ""}
-          {...register("identity-type", {
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
+          defaultValue={defaultValue["identity_type"] || ""}
+          {...register("identity_type", {
             required: "Identity type is required",
           })}
         >
@@ -44,7 +44,7 @@ function AdditionalInformation() {
           <option value="pan-card">Pan Card</option>
           <option value="passport">Passport</option>
         </select>
-        <Error message={errors["identity-type"]?.message} />
+        <Error message={errors["identity_type"]?.message} />
       </div>
 
       <div className="mb-6">
@@ -53,12 +53,12 @@ function AdditionalInformation() {
           type="file"
           bg="bg-gray-100"
           rounded={false}
-          {...register("document", {
+          {...register("identity_document", {
             required: "Document is required",
             validate: (files) => validateFileInput(files),
           })}
         />
-        <Error message={errors["document"]?.message} />
+        <Error message={errors["identity_document"]?.message} />
       </div>
     </>
   );

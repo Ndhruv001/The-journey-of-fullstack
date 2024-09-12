@@ -1,12 +1,9 @@
 import express from "express";
-import {
-  doctorRegistrationValidationRules,
-  validate,
-} from "../../middlewares/doctor/validateDoctorRegistration.js";
-import {
-  registerDoctor,
-} from "../../controllers/doctor/doctorControllers.js";
-import upload from "../../middlewares/multerMiddleware.js";
+import { doctorRegistrationValidationRules } from "../../middlewares/doctor/validateDoctorRegistration.js";
+import { registerDoctor, getDoctorsList } from "../../controllers/doctor/doctorControllers.js";
+import upload from "../../middlewares/user/multerMiddleware.js";
+import validate from "../../utils/validationResult.js";
+import { verifyJWT } from "../../middlewares/user/verifyJWT.js";
 
 const router = express.Router();
 
@@ -23,5 +20,6 @@ router.post(
   registerDoctor
 );
 
+router.get('/list', verifyJWT("patient"), getDoctorsList)
 
 export default router;

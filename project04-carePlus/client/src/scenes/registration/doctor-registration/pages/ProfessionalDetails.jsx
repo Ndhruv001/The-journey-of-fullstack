@@ -1,8 +1,8 @@
+import { useFormContext } from "react-hook-form";
+import validateFileInput from "@/lib/helpers/validateFileInput";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
-import { useFormContext } from "react-hook-form";
 import Error from "@/components/Error";
-import validateFileInput from "@/lib/helpers/validateFileInput";
 
 function ProfessionalDetails() {
   const {
@@ -18,7 +18,7 @@ function ProfessionalDetails() {
       <div className="mb-4">
         <Label>Specialization</Label>
         <select
-          className="w-full p-2 border border-gray-300 focus:outline-none pl-4 bg-gray-100"
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["specialization"] || ""}
           {...register("specialization", {
             required: "Specialization is required",
@@ -47,18 +47,18 @@ function ProfessionalDetails() {
           placeholder="Enter license number"
           rounded={false}
           bg="bg-gray-100"
-          defaultValue={defaultValue["medical-lecense-number"] || ""}
-          {...register("medical-license-number", {
+          defaultValue={defaultValue["medical_lecense_number"] || ""}
+          {...register("medical_license_number", {
             required: "Medical license number is required",
           })}
         />
-        <Error message={errors["medical-license-number"]?.message} />
+        <Error message={errors["medical_license_number"]?.message} />
       </div>
 
       <div className="mb-4">
         <Label>Years of Experience</Label>
         <select
-          className="w-full p-2 border border-gray-300 focus:outline-none pl-4 bg-gray-100"
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["experience"] || ""}
           {...register("experience", {
             required: "Years of experience is required",
@@ -93,9 +93,9 @@ function ProfessionalDetails() {
       <div className="mb-4">
         <Label>Education Details</Label>
         <select
-          className="w-full p-2 border border-gray-300 focus:outline-none pl-4 bg-gray-100"
-          defaultValue={defaultValue["education"] || ""}
-          {...register("education", {
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
+          defaultValue={defaultValue["education_detail"] || ""}
+          {...register("education_detail", {
             required: "Education level is required",
           })}
         >
@@ -113,7 +113,7 @@ function ProfessionalDetails() {
             Professional Certification
           </option>
         </select>
-        <Error message={errors["education"]?.message} />
+        <Error message={errors["education_detail"]?.message} />
       </div>
     </>
   );

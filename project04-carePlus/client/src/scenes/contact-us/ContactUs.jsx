@@ -1,8 +1,45 @@
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import axiosInstance from "@/lib/config/axiosInstance";
+import validateLetterCount from '@/lib/helpers/validateLetterCount'
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
+import Error from "@/components/Error";
+import { toast } from "react-toastify";
+import { useState } from "react";
+
 
 function ContactUs() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => axiosInstance. post("/user/contact-us", data),
+    onSuccess: () => {
+      toast.success("Your message has been sent successfully!");
+      reset(); // Reset the form after successful submission
+    },
+    onError: (error) => {
+      console.log("🚀 ~ FRONTEND ~ ContactUs ~ error:", error);
+      toast.error("Failed to send message, please try again later.");
+    },
+
+    onSettled: () => {
+      setIsSubmitting(false)
+    }
+  });
+
+  function onSubmit(data) {
+    setIsSubmitting(true)
+    mutate(data);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <h1 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h1>
@@ -10,25 +47,57 @@ function ContactUs() {
         If you have any questions, feedback, or need support, please feel free
         to contact us. We&apos;re here to help you!
       </p>
-      <form className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-md bg-white rounded-lg shadow-md p-6"
+      >
         <div className="mb-4">
           <Label>Name</Label>
-          <Input placeholder="Your name" rounded={false} bg="bg-gray-100" />
+          <Input
+            placeholder="Your name"
+            bg="bg-gray-100"
+            autoComplete="name"
+            rounded={false}
+            {...register("name", { required: "Name is required" })}
+          />
+          <Error message={errors["name"]?.message} />
         </div>
+
+        {/* Email Input */}
         <div className="mb-4">
           <Label>Email</Label>
-          <Input placeholder="Your Email" rounded={false} bg="bg-gray-100" />
+          <Input
+            placeholder="Your Email"
+            bg="bg-gray-100"
+            rounded={false}
+            autoComplete="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          <Error message={errors["email"]?.message} />
         </div>
+
         <div className="mb-4">
           <Label>Message</Label>
           <textarea
-            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-xl max-h-60 min-h-32 focus:outline-none"
-            id="message"
-            rows="5"
-            placeholder="Your Message"
+          rows={5}
+            className={`w-full p-2 border border-gray-300 bg-gray-100 dark:border-gray-400 focus:outline-none pl-4 min-h-32 max-h-44 rounded-md dark:bg-gray-900`}
+            {...register("message", {
+              required: "Message is required",
+              validate: validateLetterCount,
+            })}
           ></textarea>
+          <Error message={errors["message"]?.message} />
         </div>
-        <Button>Send Message</Button>
+
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Sending..." : "Send Message"}
+        </Button>
       </form>
     </div>
   );

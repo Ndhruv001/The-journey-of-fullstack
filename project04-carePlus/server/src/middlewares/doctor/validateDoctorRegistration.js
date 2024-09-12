@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { check } from "express-validator";
 
 function doctorRegistrationValidationRules() {
   return [
@@ -33,9 +33,11 @@ function doctorRegistrationValidationRules() {
     // Date of Birth must be a valid date
     check("dob")
       .notEmpty()
-      .withMessage("Date of birth is required.")
-      .isDate()
-      .withMessage("Invalid date format."),
+      .withMessage("Date of Birth is required.")
+      .isISO8601({ strict: true, strictSeparator: true })
+      .withMessage(
+        "Date of Birth must be a valid date in YYYY-MM-DD format."
+      ),
 
     // Gender must be one of the allowed values
     check("gender")
@@ -81,8 +83,6 @@ function doctorRegistrationValidationRules() {
       .withMessage("Years of experience should be a string.")
       .notEmpty()
       .withMessage("Years of experience is required.")
-      .matches(/^\d+$/)
-      .withMessage("Years of experience must be a valid number.")
       .isLength({ max: 50 })
       .withMessage("Years of experience must be less than 50 characters."),
 
@@ -132,14 +132,5 @@ function doctorRegistrationValidationRules() {
   ];
 }
 
-function validate(req, res, next) {
-  const error = validationResult(req);
-  if (!error.isEmpty) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Input is not valid." });
-  }
-  next();
-}
 
-export { doctorRegistrationValidationRules, validate };
+export { doctorRegistrationValidationRules };

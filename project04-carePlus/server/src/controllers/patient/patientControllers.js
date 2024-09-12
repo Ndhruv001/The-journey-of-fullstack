@@ -2,6 +2,8 @@ import {
   registerPatientQuery,
   isEmailExist,
 } from "../../queries/patient/patientQueries.js";
+import {formatDate} from '../../utils/formatDateAndTime.js'
+import {capitalizeFirstLetter} from '../../utils/formatName.js'
 
 
 async function registerPatient(req, res) {
@@ -25,12 +27,15 @@ async function registerPatient(req, res) {
       .json({ success: false, message: "Email is already exist" });
   }
 
+  const formatedName = capitalizeFirstLetter(name)
+  const formatedDOB = formatDate(dob);
+
   try {
     const result = await registerPatientQuery({
-      name,
+      name: formatedName,
       email,
       password,
-      dob,
+      dob: formatedDOB,
       phone_number,
       gender,
       state,

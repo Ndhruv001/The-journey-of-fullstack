@@ -1,7 +1,7 @@
-import { verifyPassword } from "../utils/password.js";
-import { findPatientByEmail } from "../queries/patient/patientQueries.js";
-import { findDoctorByEmail } from "../queries/doctor/findDoctorByEmail.js";
-import sendTokensAndResponse from "../utils/sendTokensAndResponse.js";
+import { verifyPassword } from "../../utils/password.js";
+import { findPatientByEmail } from "../../queries/patient/patientQueries.js";
+import { findDoctorByEmail } from "../../queries/doctor/doctorQueries.js";
+import sendTokensAndResponse from "../../utils/sendTokensAndResponse.js";
 
 async function login(req, res) {
   const { email, password } = req.body;

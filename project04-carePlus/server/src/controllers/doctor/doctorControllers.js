@@ -1,8 +1,11 @@
 import {
   registerDoctorQuery,
   isEmailExist,
+  getDoctorsListQuery
 } from "../../queries/doctor/doctorQueries.js";
 import uploadOnCloudinary from "../../utils/cloudinary.js";
+import {formatDate} from '../../utils/formatDateAndTime.js'
+import { capitalizeFirstLetter } from "../../utils/formatName.js";
 
 async function registerDoctor(req, res) {
   const {
@@ -26,6 +29,9 @@ async function registerDoctor(req, res) {
     return res.status(409).json({success: false, message: "Email is already exist"});
   }
 
+  const formatedName = capitalizeFirstLetter(name);
+  const formatedDOB = formatDate(dob);
+
   try {
     // Upload files to Cloudinary
     const profilePictureUrl = profile_picture
@@ -39,10 +45,10 @@ async function registerDoctor(req, res) {
       : null;
 
     const result = await registerDoctorQuery({
-      name,
+      name: formatedName,
       email,
       password,
-      dob,
+      dob: formatedDOB,
       gender,
       phone_number,
       specialization,
@@ -67,6 +73,16 @@ async function registerDoctor(req, res) {
   }
 }
 
+async function getDoctorsList(req, res){
+  try {
+    const doctorsList = await getDoctorsListQuery();
+    return res.status(200).json({success: true, data: doctorsList})
+  } catch (error) {
+    console.log("🚀 ~ getDoctorsList ~ error:", error);
+    res.status(500).json({success: false, message: "Internal server error", error: error.message || ""})
+    
+  }
+}
 
 
-export { registerDoctor };
+export { registerDoctor, getDoctorsList };

@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 import { useForm, FormProvider } from "react-hook-form";
+import { toast } from "react-toastify";
 import BasicInformations from "./pages/BasicInformations";
 import EmergencyContact from "./pages/EmergencyContact";
 import PersonalDetails from "./pages/PersonalDetails";
 import axiosInstance from "@/lib/config/axiosInstance";
-import formatDateOfBirth from "@/lib/helpers/formatDateOfBirth";
 import SetPassword from "./pages/SetPassword";
 import Button from "@/components/Button";
 
+
 function PatientRegistration() {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
   const methods = useForm();
   const { isDirty, isValid } = methods.formState;
@@ -27,9 +29,17 @@ function PatientRegistration() {
       }, 2000);
     },
     onError: (error) => {
-      console.log("🚀 ~ PatientRegistration ~ error:", error);
-      toast.error("Registration failed! Please try again.");
+      console.log("🚀 ~ Frontend ~ PatientRegistration ~ error:", error);
+      if(error.response?.status === 409){
+        toast.error("Email is already exist! try with different email")
+      }else{
+        toast.error("Registration failed! Please try again.");
+      }
     },
+
+    onSettled: () => {
+      setIsSubmitting(false)
+    }
   });
 
   function prevStep(e) {
@@ -45,8 +55,8 @@ function PatientRegistration() {
     if (step < 4) {
       nextStep();
     } else {
-      const formatedDOB = formatDateOfBirth(data.dob);
-      mutate({ ...data, dob: formatedDOB });
+      setIsSubmitting(true)
+      mutate(data);
     }
   }
 
@@ -74,7 +84,7 @@ function PatientRegistration() {
                 type="submit"
                 disabled={step === 4 && (!isDirty || !isValid)}
               >
-                {step < 4 ? "Next" : "Submit"}
+                {isSubmitting  ? "Submitting..." : step < 4 ? "Next" : "Submit"}
               </Button>
             </div>
           </form>

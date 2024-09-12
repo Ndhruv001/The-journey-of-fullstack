@@ -1,3 +1,4 @@
+import {NavLink} from 'react-router-dom';
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 
@@ -5,7 +6,7 @@ function PatientAppointments() {
   return (
     <Container>
       <div className="flex justify-end mb-4">
-        <Button color="green">Add New Appointment</Button>
+        <NavLink to="/patient" className="text-white px-4 py-1 rounded mr-1 bg-green-500 hover:bg-green-600">Add New Appointment</NavLink>
       </div>
       <table className="w-full border-collapse">
         <thead>

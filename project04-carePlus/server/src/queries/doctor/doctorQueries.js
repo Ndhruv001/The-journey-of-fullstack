@@ -96,4 +96,13 @@ async function findDoctorByEmail(email) {
   }
 }
 
-export { registerDoctorQuery, isEmailExist, findDoctorByEmail };
+async function getDoctorsListQuery(){
+  try {
+    const [doctorsList] = await pool.execute('select id, name from doctors');  
+    return doctorsList;  
+  } catch (error) {
+    throw new Error(`Database Error: ${error}`);
+  }
+}
+
+export { registerDoctorQuery, isEmailExist, findDoctorByEmail, getDoctorsListQuery };

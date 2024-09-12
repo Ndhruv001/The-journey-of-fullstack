@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { check } from "express-validator";
 
 function patientRegistrationValidationRules() {
   return [
@@ -34,9 +34,9 @@ function patientRegistrationValidationRules() {
     // Date of Birth must be a valid date
     check("dob")
       .notEmpty()
-      .withMessage("Date of birth is required.")
-      .isDate()
-      .withMessage("Invalid date format."),
+      .withMessage("Date of Birth is required.")
+      .isISO8601({ strict: true, strictSeparator: true })
+      .withMessage("Date of Birth must be a valid date in YYYY-MM-DD format."),
 
     // Phone number must be a string and valid
     check("phone_number")
@@ -90,14 +90,5 @@ function patientRegistrationValidationRules() {
   ];
 }
 
-function validate(req, res, next) {
-  const error = validationResult(req);
-  if (!error.isEmpty) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Input is not valid." });
-  }
-  next();
-}
 
-export { patientRegistrationValidationRules, validate };
+export { patientRegistrationValidationRules };

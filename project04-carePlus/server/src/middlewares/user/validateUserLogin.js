@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { check } from "express-validator";
 
 function userLoginValidationRules() {
   return [
@@ -18,14 +18,4 @@ function userLoginValidationRules() {
   ];
 }
 
-function validate(req, res, next) {
-  const error = validationResult(req);
-  if (!error.isEmpty) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Input is not valid." });
-  }
-  next();
-}
-
-export { userLoginValidationRules, validate};
+export { userLoginValidationRules};

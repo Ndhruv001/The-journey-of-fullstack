@@ -10,7 +10,7 @@ const MAX_FILENAME_LENGTH = 100;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.resolve(__dirname, "../../public"));
+    cb(null, path.resolve(__dirname, "../../../public"));
   },
   filename: (req, file, cb) => {
     let originalName = sanitize(file.originalname);

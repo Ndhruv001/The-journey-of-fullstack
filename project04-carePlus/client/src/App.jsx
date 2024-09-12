@@ -16,6 +16,7 @@ import {
   PatientLayout,
   PatientNotifications,
   PatientMedicalRecords,
+  PatientBookAppointments,
   PatientPrescriptions,
   PatientProfile,
   PatientAppointments,
@@ -54,6 +55,7 @@ function App() {
 
       {/* PATIENT ROUTES */}
       <Route path="/patient" element={<PatientLayout />}>
+        <Route path="" element={<PatientBookAppointments />} />
         <Route path="appointments" element={<PatientAppointments />} />
         <Route path="notifications" element={<PatientNotifications />} />
         <Route path="medical-records" element={<PatientMedicalRecords />} />

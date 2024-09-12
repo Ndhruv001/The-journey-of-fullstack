@@ -16,14 +16,14 @@ function PersonalDetails() {
       <div className="mb-4">
         <Label>Gender</Label>
         <select
-          className="w-full p-2 border bg-gray-100 border-gray-300 focus:outline-none pl-4"
+          className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["gender"] || ""}
           {...register("gender", { required: "Gender is required" })}
         >
           <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
         </select>
         <Error message={errors["gender"]?.message} />
       </div>

@@ -40,8 +40,8 @@ function SetPassword() {
           bg="bg-gray-100"
           rounded={false}
           autoComplete="confirm-password"
-          defaultValue={defaultValue["confirm-password"] || ""}
-          {...register("confirm-password", {
+          defaultValue={defaultValue["confirm_password"] || ""}
+          {...register("confirm_password", {
             required: "Confirm Password is required",
             validate: (value) =>
               value === defaultValue["password"] || "Passwords do not match",
