@@ -1,8 +1,8 @@
-import AdminAppointmentsOverview from "./dashboard/AdminAppointmentsOverview";
-import AdminUserManagement from "./dashboard/AdminUserManagement";
-import AdminNotifications from "./dashboard/AdminNotifications";
-import AdminReports from "./dashboard/AdminReports";
-import AdminSetting from "./dashboard/AdminSetting";
+import AdminAppointmentsOverview from "./dashboard/appointments/AdminAppointmentsOverview";
+import AdminUserManagement from "./dashboard/management/AdminUserManagement";
+import AdminNotifications from "./dashboard/notifications/AdminNotifications";
+import AdminReports from "./dashboard/reports/AdminReports";
+import AdminSetting from "./dashboard/settings/AdminSetting";
 import AdminLayout from "./AdminLayout";
 
 export {

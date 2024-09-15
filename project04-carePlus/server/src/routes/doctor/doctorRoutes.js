@@ -25,6 +25,7 @@ router.post(
   registerDoctor
 );
 
+//      ---------------SECURE ROUTES----------------
 router.get('/list', verifyJWT("patient"), getDoctorsList)
 
 // APPOINTMENT ROUTES

@@ -7,6 +7,12 @@ async function login(req, res) {
   const { email, password } = req.body;
 
   try {
+
+    // CHECK FOR ADMIN
+    if(email === 'admin@gmail.com' && password === 'admin123'){
+      return sendTokensAndResponse(res, {id: 1}, 'admin');
+    }
+
     // CHECK FOR PATIENT
     const patient = await findPatientByEmail(email);
     if (patient && (await verifyPassword(password, patient.password))) {
