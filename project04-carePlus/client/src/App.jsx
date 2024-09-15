@@ -18,7 +18,6 @@ import {
   PatientMedicalRecords,
   PatientBookAppointments,
   PatientPrescriptions,
-  PatientProfile,
   PatientAppointments,
 } from "@/scenes/patient";
 
@@ -28,9 +27,11 @@ import {
   DoctorPatientsList,
   DoctorNotifications,
   DoctorProfile,
+  DoctorAddPrescription,
   DoctorActivePrescriptions,
   DoctorMedicalRocordsAccess,
   DoctorAppointmentsManagement,
+  DoctorOnePatientRecordsAccess
 } from "@/scenes/doctor";
 
 // ADMIN
@@ -58,9 +59,9 @@ function App() {
         <Route path="" element={<PatientBookAppointments />} />
         <Route path="appointments" element={<PatientAppointments />} />
         <Route path="notifications" element={<PatientNotifications />} />
+        <Route path="notifications/:notificationId" element={<PatientNotifications />} />
         <Route path="medical-records" element={<PatientMedicalRecords />} />
         <Route path="prescriptions" element={<PatientPrescriptions />} />
-        <Route path="profile" element={<PatientProfile />} />
       </Route>
 
       {/* DOCTOR ROUTES */}
@@ -75,10 +76,19 @@ function App() {
           element={<DoctorMedicalRocordsAccess />}
         />
         <Route
+          path="medical-records-access/:patientId"
+          element={<DoctorOnePatientRecordsAccess />}
+        />
+        <Route
           path="active-prescriptions"
           element={<DoctorActivePrescriptions />}
         />
+        <Route
+          path="add-prescriptions"
+          element={<DoctorAddPrescription />}
+        />
         <Route path="notifications" element={<DoctorNotifications />} />
+        <Route path="notifications/:notificationId" element={<DoctorNotifications />} />
         <Route path="profile" element={<DoctorProfile />} />
       </Route>
 

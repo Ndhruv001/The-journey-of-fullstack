@@ -1,9 +1,8 @@
-import PatientMedicalRecords from "./dashboard/PatientMedicalRecords";
-import PatientPrescriptions from "./dashboard/PatientPrescriptions";
-import PatientNotifications from "./dashboard/PatientNotifications";
-import PatientAppointments from "./dashboard/PatientAppointments";
-import PatientBookAppointments from "./dashboard/PatientBookAppointments";
-import PatientProfile from "./dashboard/PatientProfile";
+import PatientMedicalRecords from "./dashboard/medical-records/PatientMedicalRecords";
+import PatientPrescriptions from "./dashboard/prescriptions/PatientPrescriptions";
+import PatientNotifications from "./dashboard/notifications/PatientNotifications";
+import PatientAppointments from "./dashboard/appointments/PatientAppointments";
+import PatientBookAppointments from "./dashboard/appointments/PatientBookAppointments";
 import PatientLayout from "./PatientLayout";
 
 export {
@@ -13,5 +12,4 @@ export {
   PatientLayout,
   PatientMedicalRecords,
   PatientAppointments,
-  PatientProfile,
 };

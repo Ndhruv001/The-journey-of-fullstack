@@ -4,7 +4,7 @@ import {
   getDoctorsListQuery
 } from "../../queries/doctor/doctorQueries.js";
 import uploadOnCloudinary from "../../utils/cloudinary.js";
-import {formatDate} from '../../utils/formatDateAndTime.js'
+import {formatDateForMySQL} from '../../utils/formatDateAndTime.js'
 import { capitalizeFirstLetter } from "../../utils/formatName.js";
 
 async function registerDoctor(req, res) {
@@ -30,7 +30,7 @@ async function registerDoctor(req, res) {
   }
 
   const formatedName = capitalizeFirstLetter(name);
-  const formatedDOB = formatDate(dob);
+  const formatedDOB = formatDateForMySQL(dob);
 
   try {
     // Upload files to Cloudinary

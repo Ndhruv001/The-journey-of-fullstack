@@ -4,7 +4,6 @@ import {
   CalendarDaysIcon,
   DocumentTextIcon,
   ClipboardDocumentCheckIcon,
-  UserCircleIcon,
   BellIcon,
 } from "@heroicons/react/24/solid";
 
@@ -31,10 +30,6 @@ function PatientSidebar() {
         <span>Notifications</span>
       </SidebarItem>
 
-      <SidebarItem path="profile">
-        <UserCircleIcon width={20} />
-        <span>Profile</span>
-      </SidebarItem>
     </SidebarLayout>
   );
 }

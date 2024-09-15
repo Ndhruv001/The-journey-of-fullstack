@@ -1,9 +1,11 @@
-import DoctorAppointmentsManagement from "./dashboard/DoctorAppointmentsManagement";
-import DoctorMedicalRocordsAccess from "./dashboard/DoctorMedicalRocordsAccess";
-import DoctorActivePrescriptions from "./dashboard/DoctorActivePrescriptions";
-import DoctorNotifications from "./dashboard/DoctorNotifications";
-import DoctorPatientsList from "./dashboard/DoctorPatientsList";
-import DoctorProfile from "./dashboard/DoctorProfile";
+import DoctorAppointmentsManagement from "./dashboard/appointments-management/DoctorAppointmentsManagement";
+import DoctorMedicalRocordsAccess from "./dashboard/medical-records-access/DoctorMedicalRocordsAccess";
+import DoctorOnePatientRecordsAccess from "./dashboard/medical-records-access/DoctorOnePatientRecordsAccess";
+import DoctorActivePrescriptions from "./dashboard/active-prescriptions/DoctorActivePrescriptions";
+import DoctorAddPrescription from "./dashboard/active-prescriptions/DoctorAddPrescription";
+import DoctorNotifications from "./dashboard/notifications/DoctorNotifications";
+import DoctorPatientsList from "./dashboard/patients-list/DoctorPatientsList";
+import DoctorProfile from "./dashboard/profile/DoctorProfile";
 import DoctorLayout from "./DoctorLayout";
 
 export {
@@ -11,7 +13,9 @@ export {
   DoctorPatientsList,
   DoctorLayout,
   DoctorProfile,
+  DoctorAddPrescription,
   DoctorActivePrescriptions,
   DoctorMedicalRocordsAccess,
   DoctorAppointmentsManagement,
+  DoctorOnePatientRecordsAccess
 };

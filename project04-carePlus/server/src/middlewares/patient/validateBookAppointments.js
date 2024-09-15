@@ -25,10 +25,8 @@ function bookAppointmentValidationRules() {
     check("purpose")
       .isString()
       .withMessage("Purpose must be a string.")
-      .isLength({ max: 255 })
-      .withMessage("Purpose must be less than 255 characters.")
-      .notEmpty()
-      .withMessage("Purpose is required."),
+      .isIn(['Checkup', 'Consultation', 'Follow-Up', 'Test', 'Emergency', 'Vaccination', 'Other'])
+      .withMessage('Invalid purpose provided. It must be one of the allowed values.'),
   ];
 }
 

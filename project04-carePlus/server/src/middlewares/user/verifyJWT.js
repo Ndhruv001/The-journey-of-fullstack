@@ -3,7 +3,7 @@ import httpOnlyOptions from "../../utils/httpOnlyOptions.js";
 
 function verifyJWT(type) {
   return (req, res, next) => {
-    const token = req.cookies.accessToken || req.headers?.authorization.split(' '[1])
+    const token = req.cookies.accessToken || req.headers?.authorization?.split(" ")[1];
     console.log("🚀 ~ return ~ token:", token)
 
     if (!token) {

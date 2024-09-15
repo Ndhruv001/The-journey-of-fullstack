@@ -12,7 +12,7 @@ async function uploadOnCloudinary(localFilePath) {
     fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
-    console.log("🚀 ~ uploadOnCloudinary ~ error:", error);
+    console.log("🚀 ~ uploadOnCloudinary ~ error:", error.message);
     fs.unlinkSync(localFilePath);
     throw new Error("Cloudinary error: ", error.message);
   }

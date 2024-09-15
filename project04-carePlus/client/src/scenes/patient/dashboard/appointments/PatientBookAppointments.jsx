@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/lib/config/axiosInstance";
 import { toast } from "react-toastify";
-import validateLetterCount from "@/lib/helpers/validateLetterCount";
 import Container from "@/components/Container";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
@@ -37,12 +36,12 @@ function BookAppointment() {
       toast.error(`Error booking appointment: ${error.message}`);
     },
     onSettled: () => {
-      setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   const onSubmit = (data) => {
-  setIsSubmitting(true)
+    setIsSubmitting(true);
     mutate(data);
   };
 
@@ -98,15 +97,23 @@ function BookAppointment() {
 
         <div className="mb-4">
           <Label>Purpose</Label>
-          <textarea
-            rows={5}
-            className={`w-full p-2 border border-gray-300 bg-gray-100 dark:border-gray-400 min-h-32 max-h-44 focus:outline-none pl-4 rounded-md dark:bg-gray-900`}
-            placeholder="Enter the purpose of your appointment"
+          <select
+            className={`w-full bg-gray-100 dark:bg-gray-900 dark:text-white p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
             {...register("purpose", {
               required: "Purpose is required",
-              validate: validateLetterCount,
             })}
-          ></textarea>
+          >
+            <option value="" >
+              Select a purpose
+            </option>
+            <option value="Checkup">Checkup</option>
+            <option value="Consultation">Consultation</option>
+            <option value="Follow-Up">Follow-Up</option>
+            <option value="Test">Test</option>
+            <option value="Emergency">Emergency</option>
+            <option value="Vaccination">Vaccination</option>
+            <option value="Other">Other</option>
+          </select>
           <Error message={errors["purpose"]?.message} />
         </div>
 
@@ -119,3 +126,4 @@ function BookAppointment() {
 }
 
 export default BookAppointment;
+
