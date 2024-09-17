@@ -20,7 +20,24 @@ async function insertAppointment({
   }
 }
 
-async function getAppointmentsListQuery({id}) {
+async function rescheduleAppointmentQuery({
+  id,
+  appointment_date,
+  appointment_time,
+}) {
+  try {
+   await pool.execute(
+      `UPDATE appointments SET appointment_date = ? , appointment_time = ? WHERE id = ?`,
+      [appointment_date, appointment_time, id]
+    );
+
+    return ;
+  } catch (error) {
+    throw new Error(`Failed to insert appointment ${error?.message}`);
+  }
+}
+
+async function getAppointmentsListQuery({ id }) {
   try {
     const [result] = await pool.execute(
       `select
@@ -32,7 +49,8 @@ async function getAppointmentsListQuery({id}) {
       from appointments a join doctors d 
       on a.doctor_id = d.id
       where a.patient_id = ?
-      order by a.appointment_date desc, a.appointment_time desc;`, [id]
+      order by a.appointment_date desc, a.appointment_time desc;`,
+      [id]
     );
     return result;
   } catch (error) {
@@ -52,4 +70,9 @@ async function cancelAppointmentQuery({ id }) {
   }
 }
 
-export { insertAppointment, getAppointmentsListQuery, cancelAppointmentQuery };
+export {
+  insertAppointment,
+  getAppointmentsListQuery,
+  cancelAppointmentQuery,
+  rescheduleAppointmentQuery,
+};

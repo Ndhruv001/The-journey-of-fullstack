@@ -23,10 +23,27 @@ function calculateAge(dob) {
   return differenceInYears(new Date(), new Date(dob));
 }
 
+function extractDay(date) {
+  return format(new Date(date), 'dd'); 
+}
+
+function extractMonth(date) {  
+  const fomatedDate = `${date}-01`
+  return format(new Date(fomatedDate), 'MM'); 
+}
+
+function extractYear(date) {
+  const fomatedDate = `${date}-01-01`
+  return format(new Date(fomatedDate), 'yy'); 
+}
+
 export {
   formatDateForMySQL,
   formatTimeForMySQL,
   formatDateForClient,
   formatTimeForClient,
+  extractDay,
+  extractMonth,
+  extractYear,
   calculateAge
 };

@@ -9,9 +9,12 @@ import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
 import Button from "@/components/Button";
 import H4 from "@/components/H4";
+import EditPrescription from "./EditPrescription";
 
 function DoctorActivePrescriptions() {
   const [isCompleting, setIsCompleting] = useState(false);
+  const [selectedPrescription, setSelectedPrescription] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
@@ -40,6 +43,11 @@ function DoctorActivePrescriptions() {
       setIsCompleting(false);
     },
   });
+
+  function handleEdit(prescription) {
+    setIsEditing(true);
+    setSelectedPrescription(prescription);
+  };
 
   function handleComplete(data) {
     setIsCompleting(true);
@@ -87,7 +95,7 @@ function DoctorActivePrescriptions() {
               <p className="font-semibold ">
                 Status: <span className="font-normal">{item.status}</span>
               </p>
-              <Button>Edit Prescription</Button>
+              <Button onClick={() => handleEdit(item)}>Edit Prescription</Button>
               <Button
                 color="red"
                 disabled={isCompleting}
@@ -102,6 +110,16 @@ function DoctorActivePrescriptions() {
         <p className="text-center text-gray-500 dark:text-gray-400">
           There is no data available.
         </p>
+      )}
+
+      
+      {/* Reschedule Modal */}
+      {isEditing && (
+        <EditPrescription
+          isOpen={isEditing}
+          onClose={() => setIsEditing(false)}
+          prescription={selectedPrescription}
+        />
       )}
     </Container>
   );

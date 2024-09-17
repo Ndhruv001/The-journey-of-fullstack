@@ -12,12 +12,15 @@ async function getPerscriptionsListQuery({ id }) {
     FROM prescriptions p JOIN doctors d 
     ON p.doctor_id = d.id
     where p.patient_id = ?
-    ORDER BY p.status`,[id]
+    ORDER BY p.status`,
+      [id]
     );
     return result;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }
 }
+
+
 
 export { getPerscriptionsListQuery };

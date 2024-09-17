@@ -1,6 +1,7 @@
 import { verifyPassword } from "../../utils/password.js";
 import { findPatientByEmail } from "../../queries/patient/patientQueries.js";
 import { findDoctorByEmail } from "../../queries/doctor/doctorQueries.js";
+import { findAdminByEmail } from "../../queries/admin/adminQueries.js";
 import sendTokensAndResponse from "../../utils/sendTokensAndResponse.js";
 
 async function login(req, res) {
@@ -9,8 +10,9 @@ async function login(req, res) {
   try {
 
     // CHECK FOR ADMIN
-    if(email === 'admin@gmail.com' && password === 'admin123'){
-      return sendTokensAndResponse(res, {id: 1}, 'admin');
+    const admin = await findAdminByEmail(email);
+    if(admin && (await verifyPassword(password, admin.password))){
+      return sendTokensAndResponse(res, admin, 'admin');
     }
 
     // CHECK FOR PATIENT

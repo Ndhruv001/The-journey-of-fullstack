@@ -13,4 +13,6 @@ async function getPerscriptionsList(req, res){
     }
 }
 
-export { getPerscriptionsList}
+
+
+export { getPerscriptionsList }

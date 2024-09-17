@@ -1,4 +1,4 @@
-import { getPrescriptionsListQuery, markPrescriptionAsCompleteQuery, addPrescriptionQuery } from "../../queries/doctor/prescriptionQueries.js";
+import { getPrescriptionsListQuery, markPrescriptionAsCompleteQuery, addPrescriptionQuery, editPrescriptionQuery } from "../../queries/doctor/prescriptionQueries.js";
 
 async function getPrescriptionsList(req, res) {
   const { id } = req.user;
@@ -39,4 +39,20 @@ async function addPrescription(req, res){
   }
 }
 
-export { getPrescriptionsList, markPrescriptionAsComplete, addPrescription };
+async function editPrescription(req, res){
+  const {id, medication_name, dosage} = req.body;
+  console.log("🚀 ~ editPrescription ~ dosage:", dosage)
+  console.log("🚀 ~ editPrescription ~ medication_name:", medication_name)
+  console.log("🚀 ~ editPrescription ~ id:", id)
+
+  try {
+      await editPrescriptionQuery({id, medication_name, dosage});
+      return res.status(200).json({success: true, message: "Edit prescription successfully"});
+  } catch (error) {
+      console.log("🚀 ~ editPrescription ~ error:", error);
+      return res.status(500).json({success: false, message: "Internal server error", errors: error})
+      
+  }
+}
+
+export { getPrescriptionsList, markPrescriptionAsComplete, addPrescription, editPrescription };

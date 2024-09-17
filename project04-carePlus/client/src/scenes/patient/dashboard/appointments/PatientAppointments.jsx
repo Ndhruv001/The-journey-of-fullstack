@@ -8,11 +8,13 @@ import axiosInstance from "@/lib/config/axiosInstance";
 import Container from "@/components/Container";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
-
+import RescheduleFormModal from './RescheduleFormModal';
 
 function PatientAppointments() {
+  const [isRescheduling, setIsRescheduling] = useState(false);
   const [isCancelling, setIsCancelling] = useState(false);
-  const [isReschedulling, setIsReschedulling] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+
   const queryClient = useQueryClient();
 
   const {
@@ -28,32 +30,31 @@ function PatientAppointments() {
     },
   });
 
-  const {mutate: cancelAppointment} = useMutation({
+  const { mutate: cancelAppointment } = useMutation({
     mutationFn: (appointmentId) => axiosInstance.post('/patient/appointments/cancel', appointmentId),
     onSuccess: () => {
       toast.success("Appointment cancelled successfully!");
-      queryClient.invalidateQueries('appointments')
+      queryClient.invalidateQueries('appointments');
     },
     onError: (error) => {
-      toast.error(`Error cancel appointment: ${error.message}`);
+      toast.error(`Error cancelling appointment: ${error.message}`);
     },
     onSettled: () => {
       setIsCancelling(false)
     }
-  })
+  });
 
   function handleReschedule(rowData) {
-    console.log("Rescheduling:", rowData);
-    
+    setSelectedAppointment(rowData);
+    setIsRescheduling(true);
   }
-  function handleCancel(rowData) {
-    if(confirm("are you sure! you want to cancel the appointment")){
-      setIsCancelling(true)
-      cancelAppointment({id: rowData.id});
-    }
-  } 
 
-  const COLUMNS = columnDefinition({ handleReschedule, handleCancel, isCancelling, isReschedulling });
+  function handleCancel(data){
+    setIsCancelling(true);
+    cancelAppointment({id: data.id})
+  }
+
+  const COLUMNS = columnDefinition({ handleReschedule, handleCancel, isRescheduling, isCancelling });
   const columns = useMemo(() => COLUMNS, []);
   const memoizeData = useMemo(() => appointmentsList || [], [appointmentsList]);
 
@@ -69,6 +70,23 @@ function PatientAppointments() {
 
   if (isError) {
     return <ErrorResponse error={error} />;
+  }
+
+  function getRowClasses(status) {
+    switch (status) {
+      case "Cancelled":
+        return "text-orange-400"; 
+      case "Rejected":
+        return "text-red-600"; 
+      case "Completed":
+        return "text-blue-600"; 
+      case "Scheduled":
+        return "text-green-600"; 
+      case "Pending":
+        return "text-yellow-400"; 
+      default:
+        return ""; 
+    }
   }
 
   return (
@@ -103,12 +121,13 @@ function PatientAppointments() {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
+            const rowClasses = getRowClasses(row.original.status);
             return (
-              <tr key={row.id} {...row.getRowProps()} className={row.original.status === "Cancelled" ? "opacity-50" : ""}>
+              <tr key={row.id} {...row.getRowProps()} className={`${rowClasses} border`}>
                 {row.cells.map((cell) => {
                   const { key, ...rest } = cell.getCellProps();
                   return (
-                    <td key={key} {...rest} className="border p-2 ">
+                    <td key={key} {...rest} className="border p-2">
                       {cell.render("Cell")}
                     </td>
                   );
@@ -118,6 +137,15 @@ function PatientAppointments() {
           })}
         </tbody>
       </table>
+
+      {/* Reschedule Modal */}
+      {isRescheduling && (
+        <RescheduleFormModal
+          isOpen={isRescheduling}
+          onClose={() => setIsRescheduling(false)}
+          appointment={selectedAppointment}
+        />
+      )}
     </Container>
   );
 }

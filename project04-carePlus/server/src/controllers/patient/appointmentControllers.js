@@ -1,4 +1,4 @@
-import { insertAppointment, getAppointmentsListQuery, cancelAppointmentQuery } from '../../queries/patient/appointmentQueries.js';
+import { insertAppointment, getAppointmentsListQuery, cancelAppointmentQuery, rescheduleAppointmentQuery } from '../../queries/patient/appointmentQueries.js';
 import {formatDateForMySQL, formatTimeForMySQL, formatDateForClient, formatTimeForClient } from '../../utils/formatDateAndTime.js';
 
 async function bookAppointment(req, res) {
@@ -20,6 +20,27 @@ async function bookAppointment(req, res) {
     return res.status(201).json({ success: true, appointmentId: result.insertId });
   } catch (error) {
     console.log("🚀 ~ bookAppointment ~ error:", error);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+}
+
+async function rescheduleAppointment(req, res) {
+  const { id, appointment_date, appointment_time } = req.body;
+
+
+  const formatedDate = formatDateForMySQL(appointment_date);
+  const formatedTime = formatTimeForMySQL(appointment_time);
+
+  try {
+    await rescheduleAppointmentQuery({
+      id: id,
+      appointment_date: formatedDate,
+      appointment_time: formatedTime,
+    });
+
+    return res.status(201).json({ success: true, message: "Appointment rescheduled successfully"});
+  } catch (error) {
+    console.log("🚀 ~ rescheduleAppointment ~ error:", error);
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
 }
@@ -54,4 +75,4 @@ async function cancelAppointment(req, res){
   }
 }
 
-export { bookAppointment, getAppointmentsList, cancelAppointment};
+export { bookAppointment, getAppointmentsList, cancelAppointment, rescheduleAppointment};

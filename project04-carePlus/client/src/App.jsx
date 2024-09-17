@@ -14,6 +14,7 @@ import {
 // PATIENT
 import {
   PatientLayout,
+  PatientDoctorProfile,
   PatientNotifications,
   PatientMedicalRecords,
   PatientBookAppointments,
@@ -41,6 +42,8 @@ import {
   AdminReports,
   AdminSetting,
   AdminUserManagement,
+  AdminAnalytics,
+  AdminDoctorProfile,
   AdminAppointmentsOverview,
 } from "@/scenes/admin";
 
@@ -58,6 +61,7 @@ function App() {
       <Route path="/patient" element={<PatientLayout />}>
         <Route path="" element={<PatientBookAppointments />} />
         <Route path="appointments" element={<PatientAppointments />} />
+        <Route path="doctor-profile/:doctorId" element={<PatientDoctorProfile />} />
         <Route path="notifications" element={<PatientNotifications />} />
         <Route path="notifications/:notificationId" element={<PatientNotifications />} />
         <Route path="medical-records" element={<PatientMedicalRecords />} />
@@ -95,12 +99,18 @@ function App() {
       {/* ADMIN ROUTES */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route
+          path=""
+          element={<AdminAnalytics />}
+        />
+        <Route
           path="appointments-overview"
           element={<AdminAppointmentsOverview />}
         />
         <Route path="user-management" element={<AdminUserManagement />} />
+        <Route path="user-management/doctor-profile/:doctorId" element={<AdminDoctorProfile />} />
         <Route path="reports" element={<AdminReports />} />
         <Route path="notifications" element={<AdminNotifications />} />
+        <Route path="notifications/:notificationId" element={<AdminNotifications />} />
         <Route path="setting" element={<AdminSetting />} />
       </Route>
 

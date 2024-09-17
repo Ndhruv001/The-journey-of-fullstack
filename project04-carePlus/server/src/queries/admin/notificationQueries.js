@@ -20,15 +20,15 @@ async function getNotificationsListQuery({ id, type }) {
   }
 }
 
-async function markNotificationAsReadQuery({ id }) {
+async function markNotificationAsReadQuery({ notificationId }) {
   try {
-    const [result] = await pool.execute(
+    await pool.execute(
       `UPDATE notifications
       SET is_read = TRUE
       WHERE id = ?;`,
-      [id]
+      [notificationId]
     );
-    return result;
+    return ;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }

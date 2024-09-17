@@ -6,6 +6,7 @@ import {
 import uploadOnCloudinary from "../../utils/cloudinary.js";
 import {formatDateForMySQL} from '../../utils/formatDateAndTime.js'
 import { capitalizeFirstLetter } from "../../utils/formatName.js";
+import { generateDoctorBio } from '../../utils/gemini.js'
 
 async function registerDoctor(req, res) {
   const {
@@ -31,6 +32,8 @@ async function registerDoctor(req, res) {
 
   const formatedName = capitalizeFirstLetter(name);
   const formatedDOB = formatDateForMySQL(dob);
+
+  const bio  = await generateDoctorBio({name, specialization, experience, education_detail})
 
   try {
     // Upload files to Cloudinary
@@ -59,6 +62,7 @@ async function registerDoctor(req, res) {
       profile_picture: profilePictureUrl?.secure_url,
       identity_type,
       identity_document: identityDocumentUrl?.secure_url,
+      bio
     });
 
     res.status(201).json({

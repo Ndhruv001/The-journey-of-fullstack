@@ -16,11 +16,12 @@ async function registerDoctorQuery({
   profile_picture,
   identity_type,
   identity_document,
+  bio
 }) {
   // HASH PASSWORD BEFORE STORE
   const hashedPassword = await encryptPassword(password);
   const query = `
-        INSERT INTO doctors (
+        INSERT INTO pending_doctor_verification (
             name,
             email,
             password,
@@ -34,8 +35,9 @@ async function registerDoctorQuery({
             education_detail,
             profile_picture,
             identity_type,
-            identity_document
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            identity_document,
+            bio
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
   const values = [
@@ -53,6 +55,7 @@ async function registerDoctorQuery({
     profile_picture,
     identity_type,
     identity_document,
+    bio
   ];
 
   try {

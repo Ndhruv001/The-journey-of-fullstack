@@ -4,8 +4,9 @@ import { registerDoctor, getDoctorsList } from "../../controllers/doctor/doctorC
 import { getAppointmentsList, acceptAppointment, cancelAppointment } from "../../controllers/doctor/appointmentControllers.js";
 import { getPatientsList } from "../../controllers/doctor/patientControllers.js";
 import { getMedicalRecordsList, getMedicalRecordsListByPatientId } from "../../controllers/doctor/medicalRecordControllers.js";
-import { getPrescriptionsList, markPrescriptionAsComplete, addPrescription } from "../../controllers/doctor/prescriptionControllers.js";
+import { getPrescriptionsList, markPrescriptionAsComplete, addPrescription, editPrescription } from "../../controllers/doctor/prescriptionControllers.js";
 import { getNotificationsList, markNotificationAsRead } from "../../controllers/doctor/notificationControllers.js";
+import { getProfile } from "../../controllers/doctor/profileControllers.js";
 import upload from "../../middlewares/user/multerMiddleware.js";
 import validate from "../../utils/validationResult.js";
 import { verifyJWT } from "../../middlewares/user/verifyJWT.js";
@@ -40,6 +41,8 @@ router.get('/patients/list', verifyJWT("doctor"), getPatientsList);
 router.get('/prescriptions/list', verifyJWT("doctor"), getPrescriptionsList)
 router.post('/prescriptions/mark-as-complete', verifyJWT("doctor"), markPrescriptionAsComplete)
 router.post('/prescriptions/add', verifyJWT("doctor"), addPrescription) // !add validation for this
+router.post('/prescriptions/edit', verifyJWT("doctor"), editPrescription);
+
 
 // MEDICAL RECORDS ROUTES
 router.get('/medical-records/list', verifyJWT("doctor"), getMedicalRecordsList)
@@ -48,5 +51,8 @@ router.get('/medical-records/list/:patientId', verifyJWT("doctor"), getMedicalRe
 // NOTIFICATION ROUTES
 router.get('/notifications/list', verifyJWT("doctor"), getNotificationsList);
 router.post('/notifications/mark-as-read', verifyJWT("doctor"), markNotificationAsRead);
+
+// PROFILE ROUTES
+router.get("/profile/get", verifyJWT("doctor"), getProfile);
 
 export default router;

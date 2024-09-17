@@ -23,5 +23,22 @@ async function getAppointmentsListQuery() {
     throw new Error(`Database Error: ${error}`);
   }
 }
+async function getAppointmentsCountQuery() {
+  try {
+    const [result] = await pool.execute(`select count(*) as count from appointments;`);
+    return result[0];
+  } catch (error) {
+    throw new Error(`Database Error: ${error}`);
+  }
+}
 
-export { getAppointmentsListQuery };
+async function getAppointmentsStatusCountQuery() {
+  try {
+    const [result] = await pool.execute(`select status, count(*) as count from appointments group by status;`);
+    return result;
+  } catch (error) {
+    throw new Error(`Database Error: ${error}`);
+  }
+}
+
+export { getAppointmentsListQuery, getAppointmentsCountQuery, getAppointmentsStatusCountQuery };

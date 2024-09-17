@@ -1,69 +1,70 @@
-import ProfileImage from "@/assets/profile-image.jpeg";
-import ProfileLayout from "@/components/ProfileLayout";
-import Input from "@/components/Input";
-import Label from "@/components/Label";
-import Button from "@/components/Button";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "@/lib/config/axiosInstance";
+import Container from "@/components/Container";
+import ErrorResponse from "@/components/ErrorResponse";
+import LoadingPage from "@/components/LoadingPage";
 
 function DoctorProfile() {
+
+  const {
+    data: doctorProfile,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["doctor-profile"],
+    queryFn: async () => {
+      const response = await axiosInstance.get(`/doctor/profile/get`);
+      return response.data.data;
+    },
+  });
+
+  if (isLoading) <LoadingPage />;
+
+  if (isError) <ErrorResponse error={error} />;
+
   return (
-    <ProfileLayout profileImage={ProfileImage}>
-      <form className="space-y-6 flex flex-col">
-        <div className="flex gap-3 w-full">
-          <div className="w-3/6 ">
-            <Label>First Name</Label>
-            <Input />
+    <Container>
+
+        <div className=" pl-10 flex flex-col md:flex-row">
+          {/* Profile Picture */}
+          <div className="md:w-1/3 flex flex-col items-center">
+            <img
+              src={doctorProfile?.profile_picture}
+              alt="Doctor Profile"
+              className="w-48 h-48 rounded-full object-cover"
+            />
           </div>
 
-          <div className="w-3/6">
-            <Label>Last Name</Label>
-            <Input />
-          </div>
-        </div>
-
-        <div className="flex gap-3 w-full">
-          <div className="w-3/6 ">
-            <Label>DOB</Label>
-            <Input />
-          </div>
-
-          <div className="w-3/6">
-            <Label>Gender</Label>
-            <Input />
-          </div>
-        </div>
-
-        <div>
-          <Label>Phone Number</Label>
-          <Input />
-        </div>
-
-        <div>
-          <Label>Email</Label>
-          <Input />
-        </div>
-
-        <div>
-          <Label>Address</Label>
-          <Input />
-        </div>
-
-        <div className="flex gap-3 w-full">
-          <div className="w-3/6 ">
-            <Label>City</Label>
-            <Input />
-          </div>
-
-          <div className="w-3/6">
-            <Label>State</Label>
-            <Input />
+          {/* Doctor Basic Information */}
+          <div className="md:w-2/3 p-4">
+            <h2 className="text-2xl font-semibold mb-2">
+              {doctorProfile?.name}
+            </h2>
+            <p>
+              <span className="font-medium">Gender:</span>{" "}
+              {doctorProfile?.gender}
+            </p>
+            <p>
+              <span className="font-medium">Age:</span> {doctorProfile?.age}
+            </p>
+            <p>
+              <span className="font-medium">Experience:</span>{" "}
+              {doctorProfile?.experience}
+            </p>
+            <p>
+              <span className="font-medium">Education:</span>{" "}
+              {doctorProfile?.education_detail}
+            </p>
           </div>
         </div>
 
-        <div className="flex justify-end w-full gap-3">
-          <Button>Edit</Button>
+        {/* Editable Bio Section */}
+        <div className="mt-4">
+          <h3 className="text-xl font-semibold mb-2">Bio</h3>
+          <p >{doctorProfile?.bio}</p>
         </div>
-      </form>
-    </ProfileLayout>
+    </Container>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/lib/config/axiosInstance";
 import { toast } from "react-toastify";
@@ -11,6 +12,7 @@ import { useState } from "react";
 
 function BookAppointment() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState(false);
   const {
     register,
     handleSubmit,
@@ -40,11 +42,13 @@ function BookAppointment() {
     },
   });
 
+  
+  
   const onSubmit = (data) => {
     setIsSubmitting(true);
     mutate(data);
   };
-
+  
   return (
     <Container>
       <h2 className="text-2xl font-bold font-serif text-center text-black dark:text-white mb-6">
@@ -77,24 +81,41 @@ function BookAppointment() {
 
         <div className="mb-4">
           <Label>Doctor</Label>
-          <select
-            className={`w-full bg-gray-100 dark:bg-gray-900 dark:text-white p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
-            {...register("doctorId", { required: "Please select a doctor" })}
-          >
-            <option value="">Select a doctor</option>
-            {loadingDoctors ? (
-              <option>Loading doctors...</option>
-            ) : (
-              doctors?.map((doctor) => (
-                <option key={doctor.id} value={doctor.id}>
-                  Dr. {doctor.name}
-                </option>
-              ))
-            )}
-          </select>
-          <Error message={errors["doctorId"]?.message} />
-        </div>
+          <div className="relative">
+            {/* Doctor selection dropdown */}
+            <select
+              className={`w-full bg-gray-100 dark:bg-gray-900 dark:text-white p-2 border border-gray-300 focus:outline-none pl-4 rounded-md`}
+              {...register("doctorId", { required: "Please select a doctor" })}
+              onChange={(e) => setSelectedDoctor(e.target.value)}
+            >
+              <option value="">Select a doctor</option>
+              {loadingDoctors ? (
+                <option>Loading doctors...</option>
+              ) : (
+                doctors?.map((doctor) => (
+                  <option key={doctor.id} value={doctor.id}>
+                    Dr. {doctor.name}
+                  </option>
+                ))
+              )}
+            </select>
 
+            {/* Error message if no doctor is selected */}
+            <Error message={errors["doctorId"]?.message} />
+
+            {/* View Profile button, only visible when a doctor is selected */}
+            {selectedDoctor && (
+              <div className="mt-2">
+                <NavLink
+                  to={`doctor-profile/${selectedDoctor}`}
+                  className="text-blue-500 hover:underline"
+                >
+                  View Profile
+                </NavLink>
+              </div>
+            )}
+          </div>
+        </div>
         <div className="mb-4">
           <Label>Purpose</Label>
           <select
@@ -103,9 +124,7 @@ function BookAppointment() {
               required: "Purpose is required",
             })}
           >
-            <option value="" >
-              Select a purpose
-            </option>
+            <option value="">Select a purpose</option>
             <option value="Checkup">Checkup</option>
             <option value="Consultation">Consultation</option>
             <option value="Follow-Up">Follow-Up</option>
@@ -126,4 +145,3 @@ function BookAppointment() {
 }
 
 export default BookAppointment;
-

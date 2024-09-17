@@ -111,7 +111,7 @@ function DoctorAppointmentsManagement() {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr key={row.id} {...row.getRowProps()}>
+              <tr key={row.id} {...row.getRowProps()} className={`${row.original.status === 'Scheduled'? "text-green-500": ""}`}>
                 {row.cells.map((cell) => {
                   const { key, ...rest } = cell.getCellProps();
                   return (

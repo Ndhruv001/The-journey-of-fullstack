@@ -47,4 +47,18 @@ async function addPrescriptionQuery({doctor_id, patient_id ,medication_name, dos
   }
 }
 
-export  {getPrescriptionsListQuery, markPrescriptionAsCompleteQuery, addPrescriptionQuery}
+async function editPrescriptionQuery({ id, medication_name, dosage }) {
+  try {
+    await pool.execute(
+      `
+      UPDATE prescriptions set medication_name = ?, dosage = ? where id = ?      
+      `,
+      [medication_name, dosage, id]
+    );
+    return;
+  } catch (error) {
+    throw new Error(`Database Error: ${error}`);
+  }
+}
+
+export  {getPrescriptionsListQuery, markPrescriptionAsCompleteQuery, addPrescriptionQuery, editPrescriptionQuery}

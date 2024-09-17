@@ -15,6 +15,7 @@ async function verifyPassword(planPassword, hashedPassword) {
   try {
     return await bcrypt.compare(planPassword, hashedPassword);
   } catch (error) {
+    console.log("🚀 ~ verifyPassword ~ error:", error)
     throw new Error("Error while verifying password.");
   }
 }

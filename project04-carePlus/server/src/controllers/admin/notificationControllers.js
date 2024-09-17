@@ -27,9 +27,9 @@ async function getNotificationsList(req, res) {
 }
 
 async function markNotificationAsRead(req, res){
-  const {id} = req.body;
+  const { notificationId } = req.body;
   try {
-    await markNotificationAsReadQuery({id});
+    await markNotificationAsReadQuery({notificationId});
     return res.status(201).json({success: true, message: "Notification mark as read successfully"});
   } catch (error) {
     console.log("🚀 ~ markNotificationAsRead ~ error:", error);

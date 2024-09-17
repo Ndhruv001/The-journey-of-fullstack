@@ -1,6 +1,11 @@
 import Button from "@/components/Button";
 
-const COLUMNS = ({ handleReschedule, handleCancel, isReschedulling, isCancelling }) => [
+const COLUMNS = ({
+  handleReschedule,
+  handleCancel,
+  isRescheduling,
+  isCancelling,
+}) => [
   {
     Header: "Date",
     accessor: "appointment_date",
@@ -12,7 +17,7 @@ const COLUMNS = ({ handleReschedule, handleCancel, isReschedulling, isCancelling
   {
     Header: "Doctor",
     accessor: "doctor_name",
-    Cell: ({value}) =>  `Dr. ${value}`
+    Cell: ({ value }) => `Dr. ${value}`,
   },
   {
     Header: "Status",
@@ -22,11 +27,33 @@ const COLUMNS = ({ handleReschedule, handleCancel, isReschedulling, isCancelling
     Header: "Actions",
     Cell: ({ row }) => (
       <div className="flex justify-center">
-        <Button  disabled={row.original.status === 'Cancelled'} onClick={() => handleReschedule(row.original)}>{isReschedulling ? "Saving.." : "Reschedule"}</Button>
-        <Button disabled={row.original.status === 'Cancelled'} onClick={() => handleCancel(row.original)} color="red" >{isCancelling ? "Saving.." : "Cancel"}</Button>
+        <Button
+          disabled={
+            row.original.status === "Cancelled" ||
+            row.original.status === "Rejected" ||
+            row.original.status === "Completed" || 
+            row.original.status === 'Scheduled'
+          }
+          onClick={() => handleReschedule(row.original)}
+        >
+          {isRescheduling ? "Saving.." : "Reschedule"}
+        </Button>
+
+        <Button
+          disabled={
+            row.original.status === "Cancelled" ||
+            row.original.status === "Rejected" ||
+            row.original.status === "Completed"
+          }
+          onClick={() => handleCancel(row.original)}
+          color="red"
+        >
+          {isCancelling ? "Saving.." : "Cancel"}
+        </Button>
       </div>
     ),
   },
 ];
 
-export  {COLUMNS};
+export { COLUMNS };
+
