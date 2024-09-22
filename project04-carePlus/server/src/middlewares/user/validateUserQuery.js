@@ -24,5 +24,4 @@ function userQueryValidationRules() {
   ];
 }
 
-
 export { userQueryValidationRules };

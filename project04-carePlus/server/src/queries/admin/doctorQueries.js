@@ -40,9 +40,10 @@ async function getPopularDoctorsListQuery({ limit }) {
   }
 }
 
-async function getDoctorProfileQuery({doctorId}){
+async function getDoctorProfileQuery({ doctorId }) {
   try {
-      const [result] = await pool.execute(`
+    const [result] = await pool.execute(
+      `
       SELECT 
           d.name,
           d.gender,
@@ -60,12 +61,18 @@ async function getDoctorProfileQuery({doctorId}){
       FROM 
           pending_doctor_verification AS d
       WHERE 
-          d.id = ?;`, [doctorId]);
-      
-      return result[0];
+          d.id = ?;`,
+      [doctorId]
+    );
+
+    return result[0];
   } catch (error) {
-      throw new Error(`Database Error: ${error}`)
+    throw new Error(`Database Error: ${error}`);
   }
 }
 
-export { getDoctorsCountQuery, getPopularDoctorsListQuery, getDoctorProfileQuery };
+export {
+  getDoctorsCountQuery,
+  getPopularDoctorsListQuery,
+  getDoctorProfileQuery,
+};

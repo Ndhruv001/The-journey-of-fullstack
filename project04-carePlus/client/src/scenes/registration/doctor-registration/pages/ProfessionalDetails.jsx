@@ -16,8 +16,9 @@ function ProfessionalDetails() {
   return (
     <>
       <div className="mb-4">
-        <Label>Specialization</Label>
+        <Label htmlFor="specialization">Specialization</Label>
         <select
+          id="specialization"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["specialization"] || ""}
           {...register("specialization", {
@@ -42,11 +43,11 @@ function ProfessionalDetails() {
         <Error message={errors["specialization"]?.message} />
       </div>
       <div className="mb-4">
-        <Label>Medical License Number</Label>
+        <Label htmlFor="license-number">Medical License Number</Label>
         <Input
+          id="license-number"
           placeholder="Enter license number"
-          rounded={false}
-          bg="bg-gray-100"
+          autoComplete="license-number"
           defaultValue={defaultValue["medical_lecense_number"] || ""}
           {...register("medical_license_number", {
             required: "Medical license number is required",
@@ -56,8 +57,9 @@ function ProfessionalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Years of Experience</Label>
+        <Label htmlFor="experience">Years of Experience</Label>
         <select
+          id="experience"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["experience"] || ""}
           {...register("experience", {
@@ -77,11 +79,11 @@ function ProfessionalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Certification</Label>
+        <Label htmlFor="certification">Certification</Label>
         <Input
+          id="certification"
           type="file"
-          rounded={false}
-          bg="bg-gray-100"
+          autoComplete="certification"
           {...register("certification", {
             required: "Certifications is required",
             validate: (files) => validateFileInput(files),
@@ -91,8 +93,9 @@ function ProfessionalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Education Details</Label>
+        <Label htmlFor="education">Education Details</Label>
         <select
+          id="education"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["education_detail"] || ""}
           {...register("education_detail", {

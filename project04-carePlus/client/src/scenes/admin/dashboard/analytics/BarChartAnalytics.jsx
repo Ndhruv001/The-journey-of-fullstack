@@ -31,7 +31,7 @@ function BarchartAnalytics() {
       return response.data.data;
     },
   });
-    console.log("🚀 ~ BarchartAnalytics ~ registrationData:", registrationData)
+  console.log("🚀 ~ BarchartAnalytics ~ registrationData:", registrationData);
 
   const chartData = useMemo(() => {
     if (!registrationData) return [];
@@ -59,7 +59,8 @@ function BarchartAnalytics() {
   if (isError) return <ErrorResponse error={error} />;
 
   return (
-    <>
+    <div className="flex flex-col gap-2 ">
+      <h2 className="text-xl font-semibold text-center">Registration Trend</h2>
       <div className="flex justify-between mb-4">
         {/* User Type Dropdown (Doctor/Patient) */}
         <div>
@@ -97,14 +98,12 @@ function BarchartAnalytics() {
         >
           <XAxis dataKey="date" />
           <YAxis />
-          <Tooltip
-            contentStyle={customTooltipStyles} 
-          />
+          <Tooltip contentStyle={customTooltipStyles} />
           <Legend />
           <Bar dataKey="count" fill="#8884d8" barSize={40} />
         </BarChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 }
 

@@ -1,7 +1,9 @@
-import { getMedicalRecordsListQuery, getMedicalRecordsListByPatientIdQuery } from "../../queries/doctor/medicalRecordQueries.js";
 import {
-  formatDateForClient,
-} from "../../utils/formatDateAndTime.js";
+  getMedicalRecordsListQuery,
+  getMedicalRecordsListByPatientIdQuery,
+  addMedicalRecordQuery,
+} from "../../queries/doctor/medicalRecordQueries.js";
+import { formatDateForClient } from "../../utils/formatDateAndTime.js";
 
 async function getMedicalRecordsList(req, res) {
   const { id } = req.user;
@@ -28,7 +30,10 @@ async function getMedicalRecordsListByPatientId(req, res) {
   const { patientId } = req.params;
   const { id } = req.user;
   try {
-    const response = await getMedicalRecordsListByPatientIdQuery({ doctor_id: id, patient_id: patientId });
+    const response = await getMedicalRecordsListByPatientIdQuery({
+      doctor_id: id,
+      patient_id: patientId,
+    });
     const formatedResponse = response.map((record) => {
       return {
         ...record,
@@ -47,6 +52,38 @@ async function getMedicalRecordsListByPatientId(req, res) {
   }
 }
 
+async function addMedicalRecord(req, res) {
+  const {
+    appointment_id,
+    patient_id,
+    medication_name,
+    dosage,
+    medical_record,
+  } = req.body;
+  const { id } = req.user;
 
-export { getMedicalRecordsList, getMedicalRecordsListByPatientId };
+  try {
+    await addMedicalRecordQuery({
+      appointment_id,
+      patient_id,
+      medication_name,
+      dosage,
+      medical_record,
+      doctor_id: id,
+    });
+    return res
+      .status(201)
+      .json({ success: true, message: "Add medical record successfully." });
+  } catch (error) {
+    console.log("🚀 ~ addMedicalRecord ~ error:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error", error: error });
+  }
+}
 
+export {
+  getMedicalRecordsList,
+  getMedicalRecordsListByPatientId,
+  addMedicalRecord,
+};

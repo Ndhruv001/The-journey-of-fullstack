@@ -66,12 +66,12 @@ const EditPrescription = ({ isOpen, onClose, prescription }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Medication Name */}
           <div className="mb-4">
-            <Label>Medication Name</Label>
+            <Label htmlFor="medication_name">Medication Name</Label>
             <Input
+              id="medication_name"
               type="text"
-              bg="bg-gray-100"
+              autoComplete="medication_name"
               placeholder="Enter medication name"
-              rounded={false}
               {...register("medication_name", {
                 required: "Medication name is required",
               })}
@@ -81,11 +81,12 @@ const EditPrescription = ({ isOpen, onClose, prescription }) => {
 
           {/* Dosage */}
           <div className="mb-4">
-            <Label>Dosage</Label>
+            <Label htmlFor="dosage">Dosage</Label>
             <div className="flex space-x-4">
               {/* mg selection */}
               <div className="flex-1">
                 <select
+                  id="dosage"
                   {...register("dosage_mg", {
                     required: "Dosage in mg is required",
                   })}

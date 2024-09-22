@@ -1,5 +1,5 @@
 import pool from "../../db/connectDB.js";
-import { encryptPassword } from '../../utils/password.js'
+import { encryptPassword } from "../../utils/password.js";
 
 async function registerDoctorQuery({
   name,
@@ -16,7 +16,7 @@ async function registerDoctorQuery({
   profile_picture,
   identity_type,
   identity_document,
-  bio
+  bio,
 }) {
   // HASH PASSWORD BEFORE STORE
   const hashedPassword = await encryptPassword(password);
@@ -55,7 +55,7 @@ async function registerDoctorQuery({
     profile_picture,
     identity_type,
     identity_document,
-    bio
+    bio,
   ];
 
   try {
@@ -99,13 +99,18 @@ async function findDoctorByEmail(email) {
   }
 }
 
-async function getDoctorsListQuery(){
+async function getDoctorsListQuery() {
   try {
-    const [doctorsList] = await pool.execute('select id, name from doctors');  
-    return doctorsList;  
+    const [doctorsList] = await pool.execute("select id, name from doctors");
+    return doctorsList;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }
 }
 
-export { registerDoctorQuery, isEmailExist, findDoctorByEmail, getDoctorsListQuery };
+export {
+  registerDoctorQuery,
+  isEmailExist,
+  findDoctorByEmail,
+  getDoctorsListQuery,
+};

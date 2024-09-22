@@ -15,22 +15,22 @@ function PersonalDetails() {
   return (
     <>
       <div className="mb-4">
-        <Label>Name</Label>
+        <Label htmlFor="name">Name</Label>
         <Input
+          id="name"
           placeholder="Enter your name"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="name"
           defaultValue={defaultValue["name"] || ""}
           {...register("name", { required: "Name is required" })}
         />
         <Error message={errors["name"]?.message} />
       </div>
       <div className="mb-4">
-        <Label>Email</Label>
+        <Label htmlFor="email">Email</Label>
         <Input
+          id="email"
           placeholder="Enter your email"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="email"
           defaultValue={defaultValue["email"] || ""}
           {...register("email", {
             required: "Email is required",
@@ -44,12 +44,12 @@ function PersonalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Phone Number</Label>
+        <Label htmlFor="contact">Phone Number</Label>
         <Input
+          id="contact"
           type="tel"
           placeholder="Enter your phone number"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="contact"
           defaultValue={defaultValue["phone_number"] || ""}
           {...register("phone_number", {
             required: "Phone number is required",
@@ -63,11 +63,11 @@ function PersonalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Date of Birth</Label>
+        <Label htmlFor="dob">Date of Birth</Label>
         <Input
+          id="dob"
           type="date"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="dob"
           defaultValue={defaultValue["dob"] || ""}
           {...register("dob", { required: "Date of birth is required" })}
         />
@@ -75,8 +75,9 @@ function PersonalDetails() {
       </div>
 
       <div className="mb-4">
-        <Label>Gender</Label>
+        <Label htmlFor="gender">Gender</Label>
         <select
+          id="gender"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["gender"] || ""}
           {...register("gender", {

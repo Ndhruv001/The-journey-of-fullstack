@@ -10,40 +10,40 @@ import Button from "@/components/Button";
 import { useState } from "react";
 
 const AddNewAdmin = ({ isOpen, onClose }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty },
     watch,
     reset,
-  } = useForm({mode: "onTouched"});
+  } = useForm({ mode: "onTouched" });
 
   const password = watch("password");
 
   const { mutate } = useMutation({
     mutationFn: (data) => axiosInstance.post("/admin/new-admin/add", data),
-     
+
     onSuccess: () => {
       toast.success("Admin added successfully!");
-      onClose(); 
-      reset(); 
+      onClose();
+      reset();
     },
 
     onError: (error) => {
-      console.log("🚀~ FRONTEND ~ AddNewAdmin ~ error:", error.message)
+      console.log("🚀~ FRONTEND ~ AddNewAdmin ~ error:", error.message);
       toast.error("Something went wrong.");
     },
 
     onSettled: () => {
-        setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   function onSubmit(data) {
-    setIsSubmitting(true)
-    mutate(data); 
+    setIsSubmitting(true);
+    mutate(data);
   }
 
   return (
@@ -64,10 +64,9 @@ const AddNewAdmin = ({ isOpen, onClose }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Name */}
             <div className="mb-4">
-              <Label>Name</Label>
+              <Label htmlFor="name">Name</Label>
               <Input
-                bg="bg-gray-100"
-                rounded={false}
+                id="name"
                 placeholder="Enter name"
                 autoComplete="name"
                 type="text"
@@ -84,10 +83,9 @@ const AddNewAdmin = ({ isOpen, onClose }) => {
 
             {/* Email */}
             <div className="mb-4">
-              <Label>Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                bg="bg-gray-100"
-                rounded={false}
+                id="email"
                 placeholder="Enter email"
                 autoComplete="email"
                 type="email"
@@ -104,13 +102,12 @@ const AddNewAdmin = ({ isOpen, onClose }) => {
 
             {/* Password */}
             <div className="mb-4">
-              <Label>Password</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 type="password"
-                bg="bg-gray-100"
+                id="password"
                 placeholder="Enter password"
                 autoComplete="password"
-                rounded={false}
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -124,12 +121,11 @@ const AddNewAdmin = ({ isOpen, onClose }) => {
 
             {/* Confirm Password */}
             <div className="mb-4">
-              <Label>Confirm Password</Label>
+              <Label htmlFor="confirm-password">Confirm Password</Label>
               <Input
                 type="password"
-                bg="bg-gray-100"
-                rounded={false}
-                autoComplete="password"
+                id="confirm-password"
+                autoComplete="confirm-password"
                 placeholder="Re-enter password"
                 {...register("confirm_password", {
                   validate: (value) =>

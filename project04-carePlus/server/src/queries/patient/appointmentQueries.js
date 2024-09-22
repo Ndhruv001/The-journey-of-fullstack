@@ -26,12 +26,12 @@ async function rescheduleAppointmentQuery({
   appointment_time,
 }) {
   try {
-   await pool.execute(
+    await pool.execute(
       `UPDATE appointments SET appointment_date = ? , appointment_time = ? WHERE id = ?`,
       [appointment_date, appointment_time, id]
     );
 
-    return ;
+    return;
   } catch (error) {
     throw new Error(`Failed to insert appointment ${error?.message}`);
   }

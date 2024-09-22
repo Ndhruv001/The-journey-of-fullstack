@@ -28,7 +28,7 @@ function PatientNotifications() {
   });
 
   function handleMarkAsRead(data) {
-    if(!(data.is_read)){
+    if (!data.is_read) {
       mutate({ id: data.id });
     }
   }

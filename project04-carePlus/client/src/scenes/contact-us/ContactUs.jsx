@@ -1,14 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import axiosInstance from "@/lib/config/axiosInstance";
-import validateLetterCount from '@/lib/helpers/validateLetterCount'
+import validateLetterCount from "@/lib/helpers/validateLetterCount";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
 import Error from "@/components/Error";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
 
 function ContactUs() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,10 +19,10 @@ function ContactUs() {
   } = useForm();
 
   const { mutate } = useMutation({
-    mutationFn: (data) => axiosInstance. post("/user/contact-us", data),
+    mutationFn: (data) => axiosInstance.post("/user/contact-us", data),
     onSuccess: () => {
       toast.success("Your message has been sent successfully!");
-      reset(); // Reset the form after successful submission
+      reset();
     },
     onError: (error) => {
       console.log("🚀 ~ FRONTEND ~ ContactUs ~ error:", error);
@@ -31,12 +30,12 @@ function ContactUs() {
     },
 
     onSettled: () => {
-      setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   function onSubmit(data) {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     mutate(data);
   }
 
@@ -52,12 +51,11 @@ function ContactUs() {
         className="w-full max-w-md bg-white rounded-lg shadow-md p-6"
       >
         <div className="mb-4">
-          <Label>Name</Label>
+          <Label htmlFor="name">Name</Label>
           <Input
+            id="name"
             placeholder="Your name"
-            bg="bg-gray-100"
             autoComplete="name"
-            rounded={false}
             {...register("name", { required: "Name is required" })}
           />
           <Error message={errors["name"]?.message} />
@@ -65,11 +63,10 @@ function ContactUs() {
 
         {/* Email Input */}
         <div className="mb-4">
-          <Label>Email</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
+            id="email"
             placeholder="Your Email"
-            bg="bg-gray-100"
-            rounded={false}
             autoComplete="email"
             {...register("email", {
               required: "Email is required",
@@ -83,9 +80,10 @@ function ContactUs() {
         </div>
 
         <div className="mb-4">
-          <Label>Message</Label>
+          <Label htmlFor="message">Message</Label>
           <textarea
-          rows={5}
+            id="message"
+            rows={5}
             className={`w-full p-2 border border-gray-300 bg-gray-100 dark:border-gray-400 focus:outline-none pl-4 min-h-32 max-h-44 rounded-md dark:bg-gray-900`}
             {...register("message", {
               required: "Message is required",

@@ -1,4 +1,4 @@
-function Searchbar({filter, setFilter}) {
+function Searchbar({ filter, setFilter }) {
   return (
     <div className="flex justify-end mb-4 ">
       <input

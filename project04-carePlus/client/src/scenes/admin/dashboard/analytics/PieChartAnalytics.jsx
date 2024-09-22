@@ -5,7 +5,6 @@ import axiosInstance from "@/lib/config/axiosInstance";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
 
-
 const COLORS = {
   Cancelled: "#FFA07A",
   Scheduled: "#32CD32",
@@ -30,13 +29,12 @@ function PieChartAnalytics() {
     },
   });
 
- 
   const chartData = useMemo(() => {
     if (!appointmentsData) return [];
 
     return appointmentsData.map((item) => ({
-      name: item.status, 
-      value: item.count, 
+      name: item.status,
+      value: item.count,
     }));
   }, [appointmentsData]);
 
@@ -50,9 +48,7 @@ function PieChartAnalytics() {
 
   return (
     <div className="flex flex-col gap-2 items-center justify-center">
-      <h2 className="text-xl font-semibold">
-        Appointments Status Overview
-      </h2>
+      <h2 className="text-xl font-semibold">Appointments Status Overview</h2>
       <PieChart width={500} height={400}>
         <Pie
           data={chartData}
@@ -63,12 +59,12 @@ function PieChartAnalytics() {
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
-          label={({ name, value }) => `${name}: ${value}`} 
+          label={({ name, value }) => `${name}: ${value}`}
         >
           {chartData.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={COLORS[entry.name] || "#8884d8"} 
+              fill={COLORS[entry.name] || "#8884d8"}
             />
           ))}
         </Pie>

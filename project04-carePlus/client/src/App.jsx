@@ -31,8 +31,9 @@ import {
   DoctorAddPrescription,
   DoctorActivePrescriptions,
   DoctorMedicalRocordsAccess,
+  DoctorTodaysAppointments,
   DoctorAppointmentsManagement,
-  DoctorOnePatientRecordsAccess
+  DoctorOnePatientRecordsAccess,
 } from "@/scenes/doctor";
 
 // ADMIN
@@ -61,15 +62,22 @@ function App() {
       <Route path="/patient" element={<PatientLayout />}>
         <Route path="" element={<PatientBookAppointments />} />
         <Route path="appointments" element={<PatientAppointments />} />
-        <Route path="doctor-profile/:doctorId" element={<PatientDoctorProfile />} />
+        <Route
+          path="doctor-profile/:doctorId"
+          element={<PatientDoctorProfile />}
+        />
         <Route path="notifications" element={<PatientNotifications />} />
-        <Route path="notifications/:notificationId" element={<PatientNotifications />} />
+        <Route
+          path="notifications/:notificationId"
+          element={<PatientNotifications />}
+        />
         <Route path="medical-records" element={<PatientMedicalRecords />} />
         <Route path="prescriptions" element={<PatientPrescriptions />} />
       </Route>
 
       {/* DOCTOR ROUTES */}
       <Route path="/doctor" element={<DoctorLayout />}>
+        <Route path="" element={<DoctorTodaysAppointments />} />
         <Route
           path="appointments-management"
           element={<DoctorAppointmentsManagement />}
@@ -87,30 +95,33 @@ function App() {
           path="active-prescriptions"
           element={<DoctorActivePrescriptions />}
         />
-        <Route
-          path="add-prescriptions"
-          element={<DoctorAddPrescription />}
-        />
+        <Route path="add-prescriptions" element={<DoctorAddPrescription />} />
         <Route path="notifications" element={<DoctorNotifications />} />
-        <Route path="notifications/:notificationId" element={<DoctorNotifications />} />
+        <Route
+          path="notifications/:notificationId"
+          element={<DoctorNotifications />}
+        />
         <Route path="profile" element={<DoctorProfile />} />
       </Route>
 
       {/* ADMIN ROUTES */}
       <Route path="/admin" element={<AdminLayout />}>
-        <Route
-          path=""
-          element={<AdminAnalytics />}
-        />
+        <Route path="" element={<AdminAnalytics />} />
         <Route
           path="appointments-overview"
           element={<AdminAppointmentsOverview />}
         />
         <Route path="user-management" element={<AdminUserManagement />} />
-        <Route path="user-management/doctor-profile/:doctorId" element={<AdminDoctorProfile />} />
+        <Route
+          path="user-management/doctor-profile/:doctorId"
+          element={<AdminDoctorProfile />}
+        />
         <Route path="reports" element={<AdminReports />} />
         <Route path="notifications" element={<AdminNotifications />} />
-        <Route path="notifications/:notificationId" element={<AdminNotifications />} />
+        <Route
+          path="notifications/:notificationId"
+          element={<AdminNotifications />}
+        />
         <Route path="setting" element={<AdminSetting />} />
       </Route>
 

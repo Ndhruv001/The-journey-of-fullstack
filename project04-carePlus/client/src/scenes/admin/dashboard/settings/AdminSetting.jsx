@@ -8,7 +8,7 @@ function AdminSetting() {
   const [showAddAdminForm, setShowAddAdminForm] = useState(false);
 
   function handleAddNewAdmin() {
-    setShowAddAdminForm(true); 
+    setShowAddAdminForm(true);
   }
 
   function handleCloseForm() {
@@ -43,4 +43,3 @@ function AdminSetting() {
 }
 
 export default AdminSetting;
-

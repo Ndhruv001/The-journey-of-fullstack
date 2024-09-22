@@ -32,28 +32,52 @@ function PatientPrescriptions() {
           return (
             <DataContainer
               key={item.id}
-              className={`transition-opacity ${isCompleted ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`transition-opacity ${isCompleted ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <a
-                href={isCompleted ? undefined : `https://www.drugs.com/search.php?searchterm=${item.medication_name}`}
+                href={
+                  isCompleted
+                    ? undefined
+                    : `https://www.drugs.com/search.php?searchterm=${item.medication_name}`
+                }
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`hover:text-blue-500 cursor-pointer underline ${isCompleted ? 'pointer-events-none text-gray-500' : ''}`}
+                className={`hover:text-blue-500 cursor-pointer underline ${isCompleted ? "pointer-events-none text-gray-500" : ""}`}
               >
                 <H4>{item.medication_name}</H4>
               </a>
 
-              <p className={`font-semibold ${isCompleted ? 'text-gray-500' : ''}`}>
-                Dosage: <span className={`font-normal ${isCompleted ? 'text-gray-500' : ''}`}>{item.dosage}</span>
+              <p
+                className={`font-semibold ${isCompleted ? "text-gray-500" : ""}`}
+              >
+                Dosage:{" "}
+                <span
+                  className={`font-normal ${isCompleted ? "text-gray-500" : ""}`}
+                >
+                  {item.dosage}
+                </span>
               </p>
 
-              <p className={`font-semibold ${isCompleted ? 'text-gray-500' : ''}`}>
-                Status: <span className={`font-normal ${isCompleted ? 'text-gray-500' : ''}`}>{item.status}</span>
+              <p
+                className={`font-semibold ${isCompleted ? "text-gray-500" : ""}`}
+              >
+                Status:{" "}
+                <span
+                  className={`font-normal ${isCompleted ? "text-gray-500" : ""}`}
+                >
+                  {item.status}
+                </span>
               </p>
 
-              <p className={`font-semibold ${isCompleted ? 'text-gray-500' : ''}`}>
+              <p
+                className={`font-semibold ${isCompleted ? "text-gray-500" : ""}`}
+              >
                 Suggested by:{" "}
-                <span className={`font-normal ${isCompleted ? 'text-gray-500' : ''}`}>Dr. {item.doctor_name}</span>
+                <span
+                  className={`font-normal ${isCompleted ? "text-gray-500" : ""}`}
+                >
+                  Dr. {item.doctor_name}
+                </span>
               </p>
             </DataContainer>
           );

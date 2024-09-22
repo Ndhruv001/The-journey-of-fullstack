@@ -8,11 +8,10 @@ async function login(req, res) {
   const { email, password } = req.body;
 
   try {
-
     // CHECK FOR ADMIN
     const admin = await findAdminByEmail(email);
-    if(admin && (await verifyPassword(password, admin.password))){
-      return sendTokensAndResponse(res, admin, 'admin');
+    if (admin && (await verifyPassword(password, admin.password))) {
+      return sendTokensAndResponse(res, admin, "admin");
     }
 
     // CHECK FOR PATIENT
@@ -31,7 +30,6 @@ async function login(req, res) {
     return res
       .status(404)
       .json({ success: false, message: "Invalid email or password" });
-
   } catch (error) {
     console.error("🚀 ~ login ~ error:", error);
     return res
@@ -40,4 +38,4 @@ async function login(req, res) {
   }
 }
 
-export default login;
+export { login };

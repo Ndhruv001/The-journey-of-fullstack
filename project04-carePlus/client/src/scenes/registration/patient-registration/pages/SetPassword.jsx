@@ -14,12 +14,11 @@ function SetPassword() {
   return (
     <>
       <div className="mb-4">
-        <Label>Password</Label>
+        <Label htmlFor="password">Password</Label>
         <Input
+          id="password"
           type="password"
           placeholder="Enter password"
-          bg="bg-gray-100"
-          rounded={false}
           autoComplete="password"
           defaultValue={defaultValue["password"] || ""}
           {...register("password", {
@@ -33,12 +32,11 @@ function SetPassword() {
         <Error message={errors["password"]?.message} />
       </div>
       <div className="mb-4">
-        <Label>Confirm Password</Label>
+        <Label htmlFor="confirm-password">Confirm Password</Label>
         <Input
+          id="confirm-password"
           type="password"
           placeholder="Confirm password"
-          bg="bg-gray-100"
-          rounded={false}
           autoComplete="confirm-password"
           defaultValue={defaultValue["confirm_password"] || ""}
           {...register("confirm_password", {

@@ -16,31 +16,30 @@ function SetPassword() {
   return (
     <>
       <div className="mb-4">
-        <Label>Password</Label>
+        <Label htmlFor="password">Password</Label>
         <Input
+          id="password"
           type="password"
           placeholder="Enter password"
-          bg="bg-gray-100"
-          rounded={false}
           autoComplete="password"
           defaultValue={defaultValue["password"] || ""}
-          {...register("password", { required: "Password is required",
+          {...register("password", {
+            required: "Password is required",
             minLength: {
               value: 6,
               message: "Password must be at least 6 characters",
             },
-           })}
+          })}
         />
         <Error message={errors["password"]?.message} />
       </div>
 
       <div className="mb-4">
-        <Label>Confirm Password</Label>
+        <Label htmlFor="confirm-password">Confirm Password</Label>
         <Input
+          id="confirm-password"
           type="password"
           placeholder="Confirm password"
-          bg="bg-gray-100"
-          rounded={false}
           autoComplete="confirm-password"
           defaultValue={defaultValue["confirm_password"] || ""}
           {...register("confirm_password", {
@@ -52,8 +51,9 @@ function SetPassword() {
       </div>
 
       <div className="mb-4">
-        <Label>
+        <Label htmlFor="consent">
           <input
+            id="consent"
             type="checkbox"
             {...register("consent", {
               required: "Must be checked before submitting the form",

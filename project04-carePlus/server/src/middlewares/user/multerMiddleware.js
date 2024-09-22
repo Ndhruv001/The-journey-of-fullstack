@@ -44,6 +44,6 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: limits,
-})
+});
 
 export default upload;

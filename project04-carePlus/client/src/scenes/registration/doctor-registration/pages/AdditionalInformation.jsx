@@ -16,11 +16,10 @@ function AdditionalInformation() {
   return (
     <>
       <div className="mb-4">
-        <Label>Profile Picture</Label>
+        <Label htmlFor="profile-picture">Profile Picture</Label>
         <Input
+          id="profile-picture"
           type="file"
-          rounded={false}
-          bg="bg-gray-100"
           {...register("profile_picture", {
             required: "Profile picture is required",
             validate: (files) => validateFileInput(files),
@@ -30,8 +29,9 @@ function AdditionalInformation() {
       </div>
 
       <div className="mb-4">
-        <Label>Identity Type</Label>
+        <Label htmlFor="identity-type">Identity Type</Label>
         <select
+          id="identity-type"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["identity_type"] || ""}
           {...register("identity_type", {
@@ -48,11 +48,10 @@ function AdditionalInformation() {
       </div>
 
       <div className="mb-6">
-        <Label>Upload Document</Label>
+        <Label htmlFor="document">Upload Document</Label>
         <Input
+          id="document"
           type="file"
-          bg="bg-gray-100"
-          rounded={false}
           {...register("identity_document", {
             required: "Document is required",
             validate: (files) => validateFileInput(files),

@@ -8,7 +8,7 @@ import axiosInstance from "@/lib/config/axiosInstance";
 import Container from "@/components/Container";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
-import RescheduleFormModal from './RescheduleFormModal';
+import RescheduleFormModal from "./RescheduleFormModal";
 
 function PatientAppointments() {
   const [isRescheduling, setIsRescheduling] = useState(false);
@@ -31,17 +31,18 @@ function PatientAppointments() {
   });
 
   const { mutate: cancelAppointment } = useMutation({
-    mutationFn: (appointmentId) => axiosInstance.post('/patient/appointments/cancel', appointmentId),
+    mutationFn: (appointmentId) =>
+      axiosInstance.post("/patient/appointments/cancel", appointmentId),
     onSuccess: () => {
       toast.success("Appointment cancelled successfully!");
-      queryClient.invalidateQueries('appointments');
+      queryClient.invalidateQueries("appointments");
     },
     onError: (error) => {
       toast.error(`Error cancelling appointment: ${error.message}`);
     },
     onSettled: () => {
-      setIsCancelling(false)
-    }
+      setIsCancelling(false);
+    },
   });
 
   function handleReschedule(rowData) {
@@ -49,12 +50,17 @@ function PatientAppointments() {
     setIsRescheduling(true);
   }
 
-  function handleCancel(data){
+  function handleCancel(data) {
     setIsCancelling(true);
-    cancelAppointment({id: data.id})
+    cancelAppointment({ id: data.id });
   }
 
-  const COLUMNS = columnDefinition({ handleReschedule, handleCancel, isRescheduling, isCancelling });
+  const COLUMNS = columnDefinition({
+    handleReschedule,
+    handleCancel,
+    isRescheduling,
+    isCancelling,
+  });
   const columns = useMemo(() => COLUMNS, []);
   const memoizeData = useMemo(() => appointmentsList || [], [appointmentsList]);
 
@@ -75,17 +81,17 @@ function PatientAppointments() {
   function getRowClasses(status) {
     switch (status) {
       case "Cancelled":
-        return "text-orange-400"; 
+        return "text-orange-400";
       case "Rejected":
-        return "text-red-600"; 
+        return "text-red-600";
       case "Completed":
-        return "text-blue-600"; 
+        return "text-blue-600";
       case "Scheduled":
-        return "text-green-600"; 
+        return "text-green-600";
       case "Pending":
-        return "text-yellow-400"; 
+        return "text-yellow-400";
       default:
-        return ""; 
+        return "";
     }
   }
 
@@ -123,7 +129,11 @@ function PatientAppointments() {
             prepareRow(row);
             const rowClasses = getRowClasses(row.original.status);
             return (
-              <tr key={row.id} {...row.getRowProps()} className={`${rowClasses} border`}>
+              <tr
+                key={row.id}
+                {...row.getRowProps()}
+                className={`${rowClasses} border`}
+              >
                 {row.cells.map((cell) => {
                   const { key, ...rest } = cell.getCellProps();
                   return (

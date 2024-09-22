@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/utils/openai.js",
+    "dev": "nodemon src/index.js",
     "format": "prettier --write ."
   },
   "author": "",

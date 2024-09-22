@@ -28,7 +28,7 @@ function AdminNotifications() {
   });
 
   function handleMarkAsRead(data) {
-    if(!(data.is_read)){
+    if (!data.is_read) {
       mutate({ notificationId: data.id });
     }
   }

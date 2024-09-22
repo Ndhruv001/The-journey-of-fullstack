@@ -10,7 +10,6 @@ import axiosInstance from "@/lib/config/axiosInstance";
 import SetPassword from "./pages/SetPassword";
 import Button from "@/components/Button";
 
-
 function PatientRegistration() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,16 +29,16 @@ function PatientRegistration() {
     },
     onError: (error) => {
       console.log("🚀 ~ Frontend ~ PatientRegistration ~ error:", error);
-      if(error.response?.status === 409){
-        toast.error("Email is already exist! try with different email")
-      }else{
+      if (error.response?.status === 409) {
+        toast.error("Email is already exist! try with different email");
+      } else {
         toast.error("Registration failed! Please try again.");
       }
     },
 
     onSettled: () => {
-      setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   function prevStep(e) {
@@ -55,7 +54,7 @@ function PatientRegistration() {
     if (step < 4) {
       nextStep();
     } else {
-      setIsSubmitting(true)
+      setIsSubmitting(true);
       mutate(data);
     }
   }
@@ -84,7 +83,7 @@ function PatientRegistration() {
                 type="submit"
                 disabled={step === 4 && (!isDirty || !isValid)}
               >
-                {isSubmitting  ? "Submitting..." : step < 4 ? "Next" : "Submit"}
+                {isSubmitting ? "Submitting..." : step < 4 ? "Next" : "Submit"}
               </Button>
             </div>
           </form>

@@ -35,9 +35,7 @@ function doctorRegistrationValidationRules() {
       .notEmpty()
       .withMessage("Date of Birth is required.")
       .isISO8601({ strict: true, strictSeparator: true })
-      .withMessage(
-        "Date of Birth must be a valid date in YYYY-MM-DD format."
-      ),
+      .withMessage("Date of Birth must be a valid date in YYYY-MM-DD format."),
 
     // Gender must be one of the allowed values
     check("gender")
@@ -131,6 +129,5 @@ function doctorRegistrationValidationRules() {
       .withMessage("Identity document must be less than 255 characters."),
   ];
 }
-
 
 export { doctorRegistrationValidationRules };

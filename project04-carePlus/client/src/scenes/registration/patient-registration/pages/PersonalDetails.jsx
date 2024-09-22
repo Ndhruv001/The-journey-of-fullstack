@@ -14,8 +14,9 @@ function PersonalDetails() {
   return (
     <>
       <div className="mb-4">
-        <Label>Gender</Label>
+        <Label htmlFor="gender">Gender</Label>
         <select
+          id="gender"
           className={`w-full bg-gray-100 p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
           defaultValue={defaultValue["gender"] || ""}
           {...register("gender", { required: "Gender is required" })}
@@ -28,22 +29,22 @@ function PersonalDetails() {
         <Error message={errors["gender"]?.message} />
       </div>
       <div className="mb-4">
-        <Label>State</Label>
+        <Label htmlFor="state">State</Label>
         <Input
+          id="state"
           placeholder="Enter your state"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="state"
           defaultValue={defaultValue["state"] || ""}
           {...register("state", { required: "State is required" })}
         />
         <Error message={errors["state"]?.message} />
       </div>
       <div className="mb-6">
-        <Label>City</Label>
+        <Label htmlFor="city">City</Label>
         <Input
+          id="city"
           placeholder="Enter your city"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="city"
           defaultValue={defaultValue["city"] || ""}
           {...register("city", { required: "City is required" })}
         />

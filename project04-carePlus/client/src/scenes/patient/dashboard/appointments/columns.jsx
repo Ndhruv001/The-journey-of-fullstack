@@ -31,8 +31,8 @@ const COLUMNS = ({
           disabled={
             row.original.status === "Cancelled" ||
             row.original.status === "Rejected" ||
-            row.original.status === "Completed" || 
-            row.original.status === 'Scheduled'
+            row.original.status === "Completed" ||
+            row.original.status === "Scheduled"
           }
           onClick={() => handleReschedule(row.original)}
         >
@@ -56,4 +56,3 @@ const COLUMNS = ({
 ];
 
 export { COLUMNS };
-

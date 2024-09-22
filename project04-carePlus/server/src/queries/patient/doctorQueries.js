@@ -1,8 +1,9 @@
 import pool from "../../db/connectDB.js";
 
-async function getDoctorProfileQuery({doctorId}){
-    try {
-        const [result] = await pool.execute(`
+async function getDoctorProfileQuery({ doctorId }) {
+  try {
+    const [result] = await pool.execute(
+      `
         SELECT 
             d.name,
             d.gender,
@@ -18,12 +19,14 @@ async function getDoctorProfileQuery({doctorId}){
         FROM 
             doctors AS d
         WHERE 
-            d.id = ?;`, [doctorId]);
-        
-        return result[0];
-    } catch (error) {
-        throw new Error(`Database Error: ${error}`)
-    }
+            d.id = ?;`,
+      [doctorId]
+    );
+
+    return result[0];
+  } catch (error) {
+    throw new Error(`Database Error: ${error}`);
+  }
 }
 
-export { getDoctorProfileQuery }
+export { getDoctorProfileQuery };

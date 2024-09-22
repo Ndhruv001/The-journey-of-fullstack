@@ -11,7 +11,7 @@ async function getNotificationsListQuery({ id, type }) {
       created_at as date 
       from notifications 
       where recipient_id = ? and recipient_type = ?
-      order by created_at`,
+      order by created_at DESC `,
       [id, type]
     );
     return result;

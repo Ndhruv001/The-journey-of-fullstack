@@ -9,8 +9,8 @@ import H4 from "@/components/H4";
 import { useParams } from "react-router-dom";
 
 function DoctorOnePatientRecordsAccess() {
-    const {patientId} = useParams();
-    console.log("🚀 ~ DoctorOnePatientRecordsAccess ~ patientId:", patientId)
+  const { patientId } = useParams();
+  console.log("🚀 ~ DoctorOnePatientRecordsAccess ~ patientId:", patientId);
   const [expandedRecords, setExpandedRecords] = useState({});
   const [showButtons, setShowButtons] = useState({});
   const detailsRefs = useRef({});
@@ -51,12 +51,12 @@ function DoctorOnePatientRecordsAccess() {
 
   return (
     <Container>
-     <button
-          onClick={() => window.history.back()}
-          className="text-blue-500 hover:underline"
-        >
-          ← Back
-        </button>
+      <button
+        onClick={() => window.history.back()}
+        className="text-blue-500 hover:underline"
+      >
+        ← Back
+      </button>
       {data &&
         data.map((item) => {
           const isExpanded = expandedRecords[item.id];

@@ -16,13 +16,11 @@ async function getMedicalRecordsList(req, res) {
       .json({ success: true, data: formattedMedicalRecords });
   } catch (error) {
     console.log("🚀 ~ getMedicalRecordsList ~ error:", error);
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Internal server error",
-        errors: error,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      errors: error,
+    });
   }
 }
 

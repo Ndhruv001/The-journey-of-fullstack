@@ -70,26 +70,24 @@ function DoctorProfile() {
             {doctorProfile?.phone_number}
           </p>
           <p>
-          <a
-            href={doctorProfile?.certification}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="font-medium text-blue-500 hover:underline hover:cursor-pointer"
-          >
-            Certification
-          </a>
-
+            <a
+              href={doctorProfile?.certification}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="font-medium text-blue-500 hover:underline hover:cursor-pointer"
+            >
+              Certification
+            </a>
           </p>
           <p>
-
-          <a
-            href={doctorProfile?.identity_document}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="font-medium text-blue-500 hover:underline hover:cursor-pointer"
-          >
-            Idenity Document
-          </a>
+            <a
+              href={doctorProfile?.identity_document}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="font-medium text-blue-500 hover:underline hover:cursor-pointer"
+            >
+              Idenity Document
+            </a>
           </p>
         </div>
       </div>

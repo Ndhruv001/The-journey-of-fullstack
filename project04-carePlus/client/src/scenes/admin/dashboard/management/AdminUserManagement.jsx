@@ -34,7 +34,7 @@ function AdminUserManagement() {
       axiosInstance.post("/admin/management/approval/approve", registrationId),
     onSuccess: () => {
       toast.success("Approved");
-      queryClient.invalidateQueries("approval-list"); // & changed based on case
+      queryClient.invalidateQueries("approval-list");
     },
     onError: (error) => {
       toast.error(`Error approve registration: ${error.message}`);
@@ -49,7 +49,7 @@ function AdminUserManagement() {
       axiosInstance.post("/admin/management/approval/reject", registrationId),
     onSuccess: () => {
       toast.success("Rejected!");
-      queryClient.invalidateQueries("approval-list");// & change based on case
+      queryClient.invalidateQueries("approval-list");
     },
     onError: (error) => {
       toast.error(`Error reject registration: ${error.message}`);
@@ -104,7 +104,10 @@ function AdminUserManagement() {
   return (
     <Container>
       <Searchbar setFilter={setGlobalFilter} filter={globalFilter} />
-      <table {...getTableProps()} className="w-full border-collapse overflow-scroll">
+      <table
+        {...getTableProps()}
+        className="w-full border-collapse overflow-scroll"
+      >
         <thead>
           {headerGroups.map((headerGroup, i) => (
             <tr

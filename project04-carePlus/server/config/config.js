@@ -4,8 +4,8 @@ dotenv.config();
 
 const config = {
   port: process.env.PORT || 8000,
-  apiVersion: process.env.API_VERSION || 'v1',
-  baseURL: process.env.BASE_URL || '/api',
+  apiVersion: process.env.API_VERSION || "v1",
+  baseURL: process.env.BASE_URL || "/api",
   frontendOrigin: process.env.FRONTEND_ORIGIN || "http://localhost:5173",
   mysqlHost: process.env.MYSQL_HOST,
   mysqlUser: process.env.MYSQL_USER,
@@ -19,7 +19,7 @@ const config = {
   cloudinaryName: process.env.CLOUDINARY_NAME,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
-  geminiApiKey: process.env.GEMINI_API_KEY
+  geminiApiKey: process.env.GEMINI_API_KEY,
 };
 
 export default config;

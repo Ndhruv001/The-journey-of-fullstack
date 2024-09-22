@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 
-const COLUMNS = ({ handleAccept, handleCancel, isAccepting, isCancelling }) => [
+const COLUMNS = ({ handleComplete }) => [
   {
     Header: "Date",
     accessor: "appointment_date",
@@ -21,15 +21,8 @@ const COLUMNS = ({ handleAccept, handleCancel, isAccepting, isCancelling }) => [
     Header: "Actions",
     Cell: ({ row }) => (
       <div className="flex justify-center">
-        <Button
-          disabled={row.original.status === "Scheduled"}
-          onClick={() => handleAccept(row.original)}
-          color="green"
-        >
-          {isAccepting ? "Saving.." : "Accept"}
-        </Button>
-        <Button onClick={() => handleCancel(row.original)} color="red">
-          {isCancelling ? "Saving.." : "Cancel"}
+        <Button onClick={() => handleComplete(row.original)} color="green">
+          complete
         </Button>
       </div>
     ),

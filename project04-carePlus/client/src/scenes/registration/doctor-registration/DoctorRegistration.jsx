@@ -27,17 +27,17 @@ function DoctorRegistration() {
 
     onError: (error) => {
       console.log("🚀 ~ Frontend ~ DoctorRegistration ~ error:", error);
-      
-      if(error.response?.status === 409){
-        toast.error("Email is already exist! try with different email")
-      }else{
+
+      if (error.response?.status === 409) {
+        toast.error("Email is already exist! try with different email");
+      } else {
         toast.error("Registration failed! Please try again.");
       }
     },
 
     onSettled: () => {
-      setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   const methods = useForm();
@@ -79,7 +79,7 @@ function DoctorRegistration() {
         }
       });
 
-      setIsSubmitting(true)
+      setIsSubmitting(true);
       mutate(formData);
     }
   }
@@ -108,7 +108,7 @@ function DoctorRegistration() {
                 type="submit"
                 disabled={step === 4 && (!isDirty || !isValid)}
               >
-                 {isSubmitting ? "Submitting..." : step < 4 ? "Next" : "Submit"}
+                {isSubmitting ? "Submitting..." : step < 4 ? "Next" : "Submit"}
               </Button>
             </div>
           </form>

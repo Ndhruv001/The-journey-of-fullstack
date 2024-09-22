@@ -17,9 +17,10 @@ async function getApprovalListQuery() {
   }
 }
 
-async function approveRegistrationQuery({registrationId}) {
+async function approveRegistrationQuery({ registrationId }) {
   try {
-    await pool.execute(`
+    await pool.execute(
+      `
       INSERT INTO doctors (
         name, 
         email, 
@@ -57,21 +58,33 @@ async function approveRegistrationQuery({registrationId}) {
         pending_doctor_verification
       WHERE 
         id = ?;
-    `, [registrationId]);
-    await pool.execute("delete from pending_doctor_verification where id  = ?;", [registrationId])
-    return ;
+    `,
+      [registrationId]
+    );
+    await pool.execute(
+      "delete from pending_doctor_verification where id  = ?;",
+      [registrationId]
+    );
+    return;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }
 }
 
-async function rejectRegistrationQuery({registrationId}) {
+async function rejectRegistrationQuery({ registrationId }) {
   try {
-    await pool.execute("delete from pending_doctor_verification where id  = ?;", [registrationId])
-    return ;
+    await pool.execute(
+      "delete from pending_doctor_verification where id  = ?;",
+      [registrationId]
+    );
+    return;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }
 }
 
-export { getApprovalListQuery, approveRegistrationQuery, rejectRegistrationQuery };
+export {
+  getApprovalListQuery,
+  approveRegistrationQuery,
+  rejectRegistrationQuery,
+};

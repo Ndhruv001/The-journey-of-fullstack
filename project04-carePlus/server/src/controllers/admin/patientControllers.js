@@ -6,7 +6,11 @@ async function getPatientsCount(_, res) {
 
     return res
       .status(200)
-      .json({ success: true, data: response, message: "Get total patient count successfully!" });
+      .json({
+        success: true,
+        data: response,
+        message: "Get total patient count successfully!",
+      });
   } catch (error) {
     console.log("🚀 ~ getPatientsCount ~ error:", error);
     return res

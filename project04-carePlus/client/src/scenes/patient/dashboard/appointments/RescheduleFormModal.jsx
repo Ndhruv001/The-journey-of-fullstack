@@ -23,7 +23,7 @@ const RescheduleFormModal = ({ isOpen, onClose, appointment }) => {
       axiosInstance.post(`/patient/appointments/reschedule`, {
         ...appointment,
         appointment_date: data.date,
-        appointment_time: data.time
+        appointment_time: data.time,
       }),
     onSuccess: () => {
       toast.success("Appointment rescheduled successfully!");
@@ -44,57 +44,55 @@ const RescheduleFormModal = ({ isOpen, onClose, appointment }) => {
   };
 
   return (
-    <>
-      <Transition as="div"
-        show={isOpen}
-        enter="transition duration-500 ease-out"
-        enterFrom="transform scale-95 opacity-0"
-        enterTo="transform scale-100 opacity-100"
-        leave="transition duration-300 ease-in"
-        leaveFrom="transform scale-100 opacity-100"
-        leaveTo="transform scale-95 opacity-0"
-        className="fixed z-50  bg-gray-700 text-gray-300 dark:bg-gray-700 dark:text-gray-300 shadow-xl rounded-lg p-6 w-96 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        <h2 className="text-xl font-bold mb-4 text-center">Reschedule Appointment</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Date Input */}
-          <div className="mb-4">
-            <Input
-              type="date"
-              bg="bg-gray-100"
-              rounded={false}
-              {...register("date", { required: "Date is required" })}
-              placeholder="Select date"
-            />
-             <Error message={errors["date"]?.message} />
-          </div>
+    <Transition
+      as="div"
+      show={isOpen}
+      enter="transition duration-500 ease-out"
+      enterFrom="transform scale-95 opacity-0"
+      enterTo="transform scale-100 opacity-100"
+      leave="transition duration-300 ease-in"
+      leaveFrom="transform scale-100 opacity-100"
+      leaveTo="transform scale-95 opacity-0"
+      className="fixed z-50  bg-gray-700 text-gray-300 dark:bg-gray-700 dark:text-gray-300 shadow-xl rounded-lg p-6 w-96 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    >
+      <h2 className="text-xl font-bold mb-4 text-center">
+        Reschedule Appointment
+      </h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Date Input */}
+        <div className="mb-4">
+          <Input
+            id="date"
+            type="date"
+            autoComplete="date"
+            {...register("date", { required: "Date is required" })}
+            placeholder="Select date"
+          />
+          <Error message={errors["date"]?.message} />
+        </div>
 
-          {/* Time Input */}
-          <div className="mb-4">
-            <Input
-              type="time"
-              bg="bg-gray-100"
-              rounded={false}
-              {...register("time", { required: "Time is required" })}
-              placeholder="Select time"
-            />
-           <Error message={errors["time"]?.message} />
-          </div>
+        {/* Time Input */}
+        <div className="mb-4">
+          <Input
+            id="time"
+            type="time"
+            autoComplete="time"
+            {...register("time", { required: "Time is required" })}
+            placeholder="Select time"
+          />
+          <Error message={errors["time"]?.message} />
+        </div>
 
-          <div className="flex justify-between mt-4">
-            <Button type="button" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={!isValid || !isDirty || isSubmitting}
-            >
-              {isSubmitting ? "Rescheduling..." : "Reschedule"}
-            </Button>
-          </div>
-        </form>
-      </Transition>
-    </>
+        <div className="flex justify-between mt-4">
+          <Button type="button" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={!isValid || !isDirty || isSubmitting}>
+            {isSubmitting ? "Rescheduling..." : "Reschedule"}
+          </Button>
+        </div>
+      </form>
+    </Transition>
   );
 };
 

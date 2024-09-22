@@ -42,13 +42,11 @@ function BookAppointment() {
     },
   });
 
-  
-  
   const onSubmit = (data) => {
     setIsSubmitting(true);
     mutate(data);
   };
-  
+
   return (
     <Container>
       <h2 className="text-2xl font-bold font-serif text-center text-black dark:text-white mb-6">
@@ -56,34 +54,35 @@ function BookAppointment() {
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
-          <Label>Date</Label>
+          <Label htmlFor="date">Date</Label>
           <Input
+            id="date"
             type="date"
             placeholder="Select date"
-            bg="bg-gray-100"
-            rounded={false}
+            autoComplete="date"
             {...register("date", { required: "Date is required" })}
           />
           <Error message={errors["date"]?.message} />
         </div>
 
         <div className="mb-4">
-          <Label>Time</Label>
+          <Label htmlFor="time">Time</Label>
           <Input
+            id="time"
             type="time"
             placeholder="Select time"
-            bg="bg-gray-100"
-            rounded={false}
+            autoComplete="time"
             {...register("time", { required: "Time is required" })}
           />
           <Error message={errors["time"]?.message} />
         </div>
 
         <div className="mb-4">
-          <Label>Doctor</Label>
+          <Label htmlFor="doctor">Doctor</Label>
           <div className="relative">
             {/* Doctor selection dropdown */}
             <select
+              id="doctor"
               className={`w-full bg-gray-100 dark:bg-gray-900 dark:text-white p-2 border border-gray-300 focus:outline-none pl-4 rounded-md`}
               {...register("doctorId", { required: "Please select a doctor" })}
               onChange={(e) => setSelectedDoctor(e.target.value)}
@@ -117,8 +116,9 @@ function BookAppointment() {
           </div>
         </div>
         <div className="mb-4">
-          <Label>Purpose</Label>
+          <Label htmlFor="purpose">Purpose</Label>
           <select
+            id="purpose"
             className={`w-full bg-gray-100 dark:bg-gray-900 dark:text-white p-2 border border-gray-300  focus:outline-none pl-4  rounded-md`}
             {...register("purpose", {
               required: "Purpose is required",

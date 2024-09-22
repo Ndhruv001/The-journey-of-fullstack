@@ -1,6 +1,6 @@
 const httpOnlyOptions = {
-    httpOnly: true,
-    secure: true,
-}
+  httpOnly: true,
+  secure: true,
+};
 
 export default httpOnlyOptions;

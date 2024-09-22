@@ -65,8 +65,10 @@ function PatientMedicalRecords() {
                     overflow: "hidden",
                     display: "-webkit-box",
                     WebkitBoxOrient: "vertical",
-                    transition: "height 0.3s ease", 
-                    height: isExpanded ? `${detailsRefs.current[item.id]?.scrollHeight}px` : '25px', 
+                    transition: "height 0.3s ease",
+                    height: isExpanded
+                      ? `${detailsRefs.current[item.id]?.scrollHeight}px`
+                      : "25px",
                   }}
                 >
                   {item.details}

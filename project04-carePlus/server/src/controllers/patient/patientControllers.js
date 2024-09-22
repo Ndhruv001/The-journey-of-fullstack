@@ -2,9 +2,8 @@ import {
   registerPatientQuery,
   isEmailExist,
 } from "../../queries/patient/patientQueries.js";
-import {formatDateForMySQL} from '../../utils/formatDateAndTime.js'
-import {capitalizeFirstLetter} from '../../utils/formatName.js'
-
+import { formatDateForMySQL } from "../../utils/formatDateAndTime.js";
+import { capitalizeFirstLetter } from "../../utils/formatName.js";
 
 async function registerPatient(req, res) {
   const {
@@ -27,7 +26,7 @@ async function registerPatient(req, res) {
       .json({ success: false, message: "Email is already exist" });
   }
 
-  const formatedName = capitalizeFirstLetter(name)
+  const formatedName = capitalizeFirstLetter(name);
   const formatedDOB = formatDateForMySQL(dob);
 
   try {

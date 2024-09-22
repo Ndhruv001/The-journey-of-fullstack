@@ -1,21 +1,17 @@
 import { useMemo, useState } from "react";
 import { useTable, useGlobalFilter } from "react-table";
-import { toast } from "react-toastify";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { COLUMNS as columnDefinition } from "./columns";
 import axiosInstance from "@/lib/config/axiosInstance";
 import Container from "@/components/Container";
 import LoadingPage from "@/components/LoadingPage";
 import ErrorResponse from "@/components/ErrorResponse";
 import Searchbar from "@/components/Searchbar";
-import CancelNote from "./CancelNote";
+import AddMedicalRecord from "./AddMedicalRecord";
 
-function DoctorAppointmentsManagement() {
-  const [isCancelling, setIsCancelling] = useState(false);
-  const [isAccepting, setIsAccepting] = useState(false);
+function TodaysAppointments() {
   const [isOpen, setIsOpen] = useState(false);
-  const [rowData, setRowData] = useState(null);
-  const queryClient = useQueryClient();
+  const [appointmentData, setAppointmentData] = useState({});
 
   const {
     data: appointmentsList,
@@ -23,60 +19,16 @@ function DoctorAppointmentsManagement() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["doctor-appointments"],
+    queryKey: ["doctor-appointments-today"],
     queryFn: async () => {
-      const response = await axiosInstance.get("/doctor/appointments/list");
+      const response = await axiosInstance.get("/doctor/appointments/today");
       return response.data.data;
     },
   });
 
-  const { mutate: acceptAppointment } = useMutation({
-    mutationFn: (appointmentId) =>
-      axiosInstance.post("/doctor/appointments/accept", appointmentId),
-    onSuccess: () => {
-      toast.success("Appointment accepted!");
-      queryClient.invalidateQueries("doctor-appointments");
-    },
-    onError: (error) => {
-      toast.error(`Error accept appointment: ${error.message}`);
-    },
-    onSettled: () => {
-      setIsAccepting(false);
-    },
-  });
-
-  const { mutate: cancelAppointment } = useMutation({
-    mutationFn: (appointmentId) =>
-      axiosInstance.post("/doctor/appointments/cancel", appointmentId),
-    onSuccess: () => {
-      toast.success("Appointment cancelled successfully!");
-      queryClient.invalidateQueries("doctor-appointments");
-    },
-    onError: (error) => {
-      toast.error(`Error cancel appointment: ${error.message}`);
-    },
-    onSettled: () => {
-      setIsCancelling(false);
-    },
-  });
-
-  function handleAccept(rowData) {
-    setIsAccepting(true);
-    acceptAppointment({ id: rowData.id });
-  }
-
-  function handleCancel(rowData) {
+  function handleComplete(rowData) {
+    setAppointmentData(rowData);
     setIsOpen(true);
-    setRowData(rowData);
-    setIsCancelling(true);
-  }
-
-  function handleCancelReason(reason) {
-    cancelAppointment({
-      id: rowData.id,
-      patient_id: rowData.patient_id,
-      reason: reason,
-    });
   }
 
   function onClose() {
@@ -84,10 +36,7 @@ function DoctorAppointmentsManagement() {
   }
 
   const COLUMNS = columnDefinition({
-    handleAccept,
-    handleCancel,
-    isCancelling,
-    isAccepting,
+    handleComplete,
   });
   const columns = useMemo(() => COLUMNS, []);
   const memoizeData = useMemo(() => appointmentsList || [], [appointmentsList]);
@@ -118,7 +67,14 @@ function DoctorAppointmentsManagement() {
 
   return (
     <Container>
-      <Searchbar setFilter={setGlobalFilter} filter={globalFilter} />
+      <div className="flex justify-between">
+        <div className="mt-1">
+          <h1 className="text-xl text-center text-black dark:text-white font-serif font-semibold">
+            Today&apos;s Appointments
+          </h1>
+        </div>
+        <Searchbar setFilter={setGlobalFilter} filter={globalFilter} />
+      </div>
       <table {...getTableProps()} className="w-full border-collapse">
         <thead>
           {headerGroups.map((headerGroup, i) => (
@@ -161,14 +117,14 @@ function DoctorAppointmentsManagement() {
         </tbody>
       </table>
       {isOpen && (
-        <CancelNote
+        <AddMedicalRecord
           isOpen={isOpen}
           onClose={onClose}
-          handleCancelReason={handleCancelReason}
+          appointment={appointmentData}
         />
       )}
     </Container>
   );
 }
 
-export default DoctorAppointmentsManagement;
+export default TodaysAppointments;

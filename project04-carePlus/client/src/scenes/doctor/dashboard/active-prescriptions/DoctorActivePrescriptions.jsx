@@ -47,7 +47,7 @@ function DoctorActivePrescriptions() {
   function handleEdit(prescription) {
     setIsEditing(true);
     setSelectedPrescription(prescription);
-  };
+  }
 
   function handleComplete(data) {
     setIsCompleting(true);
@@ -95,7 +95,9 @@ function DoctorActivePrescriptions() {
               <p className="font-semibold ">
                 Status: <span className="font-normal">{item.status}</span>
               </p>
-              <Button onClick={() => handleEdit(item)}>Edit Prescription</Button>
+              <Button onClick={() => handleEdit(item)}>
+                Edit Prescription
+              </Button>
               <Button
                 color="red"
                 disabled={isCompleting}
@@ -112,7 +114,6 @@ function DoctorActivePrescriptions() {
         </p>
       )}
 
-      
       {/* Reschedule Modal */}
       {isEditing && (
         <EditPrescription

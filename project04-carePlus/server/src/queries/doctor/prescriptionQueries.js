@@ -2,7 +2,8 @@ import pool from "../../db/connectDB.js";
 
 async function getPrescriptionsListQuery({ id }) {
   try {
-    const [result] = await pool.execute(`
+    const [result] = await pool.execute(
+      `
     select 
         pres.id,
         pres.medication_name as medication,
@@ -17,33 +18,46 @@ async function getPrescriptionsListQuery({ id }) {
     where  
         doctor_id = ?
     and 
-        pres.status = 'Active';`, [id]);
+        pres.status = 'Active';`,
+      [id]
+    );
     return result;
   } catch (error) {
     throw new Error(`Database error: ${error}`);
   }
 }
 
-async function markPrescriptionAsCompleteQuery({id}){
+async function markPrescriptionAsCompleteQuery({ id }) {
   try {
-    await pool.execute(`
+    await pool.execute(
+      `
       UPDATE prescriptions
       SET status = 'Completed'
-      WHERE ID = ?;`, [id]);
-      return; 
+      WHERE ID = ?;`,
+      [id]
+    );
+    return;
   } catch (error) {
-    throw new Error(`Database error: ${error}`); 
+    throw new Error(`Database error: ${error}`);
   }
 }
 
-async function addPrescriptionQuery({doctor_id, patient_id ,medication_name, dosage}){
+async function addPrescriptionQuery({
+  doctor_id,
+  patient_id,
+  medication_name,
+  dosage,
+}) {
   try {
-    await pool.execute(`
+    await pool.execute(
+      `
       INSERT INTO prescriptions (doctor_id, patient_id, medication_name, dosage)
-      VALUES (?, ?, ?, ?)`, [doctor_id, patient_id, medication_name, dosage]);
-      return; 
+      VALUES (?, ?, ?, ?)`,
+      [doctor_id, patient_id, medication_name, dosage]
+    );
+    return;
   } catch (error) {
-    throw new Error(`Database error: ${error}`); 
+    throw new Error(`Database error: ${error}`);
   }
 }
 
@@ -61,4 +75,9 @@ async function editPrescriptionQuery({ id, medication_name, dosage }) {
   }
 }
 
-export  {getPrescriptionsListQuery, markPrescriptionAsCompleteQuery, addPrescriptionQuery, editPrescriptionQuery}
+export {
+  getPrescriptionsListQuery,
+  markPrescriptionAsCompleteQuery,
+  addPrescriptionQuery,
+  editPrescriptionQuery,
+};

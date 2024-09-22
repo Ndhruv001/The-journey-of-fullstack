@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import axiosInstance from '@/lib/config/axiosInstance'
+import axiosInstance from "@/lib/config/axiosInstance";
 import { toast } from "react-toastify";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
@@ -40,7 +40,7 @@ function DoctorAddPrescription() {
       ...data,
       dosage: formattedDosage,
     };
-  
+
     delete updatedData.dosage_mg;
     delete updatedData.dosage_tablets;
     delete updatedData.dosage_frequency;
@@ -48,7 +48,6 @@ function DoctorAddPrescription() {
     setIsSubmitting(true);
     mutate(updatedData);
   }
-  
 
   return (
     <Container>
@@ -59,12 +58,12 @@ function DoctorAddPrescription() {
 
         {/* Patient ID */}
         <div className="mb-4">
-          <Label>Patient ID</Label>
+          <Label htmlFor="patient_id">Patient ID</Label>
           <Input
+            id="patient_id"
             type="number"
-            bg="bg-gray-100"
             placeholder="Enter patient id"
-            rounded={false}
+            autoComplete="patient_id"
             {...register("patient_id", { required: "Patient ID is required" })}
           />
           <Error message={errors["patient_id"]?.message} />
@@ -72,12 +71,12 @@ function DoctorAddPrescription() {
 
         {/* Medication Name */}
         <div className="mb-4">
-          <Label>Medication Name</Label>
+          <Label htmlFor="medication_name">Medication Name</Label>
           <Input
+            id="medication_name"
             type="text"
-            bg="bg-gray-100"
             placeholder="Enter medication name"
-            rounded={false}
+            autoComplete="medication_name"
             {...register("medication_name", {
               required: "Medication name is required",
             })}
@@ -87,11 +86,12 @@ function DoctorAddPrescription() {
 
         {/* Dosage */}
         <div className="mb-4">
-          <Label>Dosage</Label>
+          <Label htmlFor="dosage">Dosage</Label>
           <div className="flex space-x-4">
             {/* mg selection */}
             <div className="flex-1">
               <select
+                id="dosage"
                 {...register("dosage_mg", {
                   required: "Dosage in mg is required",
                 })}
@@ -154,7 +154,7 @@ function DoctorAddPrescription() {
 
         <div className="text-center">
           <Button type="submit" color="green">
-            {isSubmitting? "Submitting.." : "Add Medication"}
+            {isSubmitting ? "Submitting.." : "Add Medication"}
           </Button>
         </div>
       </form>

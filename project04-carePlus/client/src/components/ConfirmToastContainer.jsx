@@ -27,16 +27,18 @@ function ConfirmToastContainer() {
   }
 
   function handleConfirm(confirmation) {
-    toast.dismiss(); 
+    toast.dismiss();
 
     if (confirmation) {
-     // ^ write the logic here for cancellation of an appointment
+      // ^ write the logic here for cancellation of an appointment
     }
   }
 
   return (
     <div>
-      <Button onClick={showConfirmToast} color="red" >Cancel</Button>
+      <Button onClick={showConfirmToast} color="red">
+        Cancel
+      </Button>
       <ToastContainer
         transition={Zoom}
         position="top-center"

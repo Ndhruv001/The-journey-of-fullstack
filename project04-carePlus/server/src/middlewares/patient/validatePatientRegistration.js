@@ -90,5 +90,4 @@ function patientRegistrationValidationRules() {
   ];
 }
 
-
 export { patientRegistrationValidationRules };

@@ -29,7 +29,6 @@ function PatientSidebar() {
         <BellIcon width={20} />
         <span>Notifications</span>
       </SidebarItem>
-
     </SidebarLayout>
   );
 }

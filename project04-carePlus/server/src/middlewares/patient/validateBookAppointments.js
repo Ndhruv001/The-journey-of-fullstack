@@ -25,8 +25,18 @@ function bookAppointmentValidationRules() {
     check("purpose")
       .isString()
       .withMessage("Purpose must be a string.")
-      .isIn(['Checkup', 'Consultation', 'Follow-Up', 'Test', 'Emergency', 'Vaccination', 'Other'])
-      .withMessage('Invalid purpose provided. It must be one of the allowed values.'),
+      .isIn([
+        "Checkup",
+        "Consultation",
+        "Follow-Up",
+        "Test",
+        "Emergency",
+        "Vaccination",
+        "Other",
+      ])
+      .withMessage(
+        "Invalid purpose provided. It must be one of the allowed values."
+      ),
   ];
 }
 

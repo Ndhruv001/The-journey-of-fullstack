@@ -14,7 +14,7 @@ async function findAdminByEmail(email) {
   }
 }
 
-async function addNewAdminQuery({name, email, password}) {
+async function addNewAdminQuery({ name, email, password }) {
   try {
     await pool.execute(
       `
@@ -23,7 +23,7 @@ async function addNewAdminQuery({name, email, password}) {
       `,
       [name, email, password]
     );
-    return ;
+    return;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }

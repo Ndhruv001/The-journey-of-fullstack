@@ -14,11 +14,11 @@ function EmergencyContact() {
   return (
     <>
       <div className="mb-4">
-        <Label>Emergency Name</Label>
+        <Label htmlFor="name">Emergency Name</Label>
         <Input
+          id="name"
           placeholder="Enter name"
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="name"
           defaultValue={defaultValue["emergency_contact_name"] || ""}
           {...register("emergency_contact_name", {
             required: "Name is required",
@@ -27,12 +27,12 @@ function EmergencyContact() {
         <Error message={errors["emergency_contact_name"]?.message} />
       </div>
       <div className="mb-4">
-        <Label>Emergency Phone Number</Label>
+        <Label htmlFor="contact">Emergency Phone Number</Label>
         <Input
+          id="contact"
           type="number"
           placeholder="Enter Phone No."
-          bg="bg-gray-100"
-          rounded={false}
+          autoComplete="contact"
           defaultValue={defaultValue["emergency_contact_number"] || ""}
           {...register("emergency_contact_number", {
             required: "Phone number is required",

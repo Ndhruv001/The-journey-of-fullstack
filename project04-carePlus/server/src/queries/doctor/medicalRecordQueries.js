@@ -41,7 +41,10 @@ async function getMedicalRecordsListQuery({ id }) {
   }
 }
 
-async function getMedicalRecordsListByPatientIdQuery({ doctor_id, patient_id }) {
+async function getMedicalRecordsListByPatientIdQuery({
+  doctor_id,
+  patient_id,
+}) {
   try {
     const [result] = await pool.execute(
       `select id,
@@ -60,4 +63,74 @@ async function getMedicalRecordsListByPatientIdQuery({ doctor_id, patient_id }) 
   }
 }
 
-export { getMedicalRecordsListQuery, getMedicalRecordsListByPatientIdQuery };
+async function addMedicalRecordQuery({
+  appointment_id,
+  patient_id,
+  doctor_id,
+  medical_record,
+  prescription,
+}) {
+  const connection = await pool.getConnection(); // Acquire a connection from the pool
+
+  try {
+    // Start the transaction
+    await connection.beginTransaction();
+
+    // Step 1: Update the appointment status to 'completed'
+    await connection.execute(
+      `
+      UPDATE appointments
+      SET status = 'Completed'
+      WHERE id = ?;
+      `,
+      [appointment_id]
+    );
+
+    // Step 2: Insert the medical record
+    await connection.execute(
+      `
+      INSERT INTO medical_records (patient_id, doctor_id, record_type, details)
+      VALUES (?, ?, ?, ?);
+      `,
+      [
+        patient_id,
+        doctor_id,
+        medical_record.record_type,
+        medical_record.details,
+      ]
+    );
+
+    // Step 3: Insert the prescription if it exists
+    if (prescription && prescription.medication_name && prescription.dosage) {
+      await connection.execute(
+        `
+        INSERT INTO prescriptions (patient_id, doctor_id, medication_name, dosage)
+        VALUES (?, ?, ?, ?);
+        `,
+        [
+          patient_id,
+          doctor_id,
+          prescription.medication_name,
+          prescription.dosage,
+        ]
+      );
+    }
+
+    // Commit the transaction if all steps succeed
+    await connection.commit();
+    return; // Return or send a success response as needed
+  } catch (error) {
+    // Rollback the transaction in case of any errors
+    await connection.rollback();
+    throw new Error(`Transaction error: ${error.message}`);
+  } finally {
+    // Release the connection back to the pool
+    connection.release();
+  }
+}
+
+export {
+  getMedicalRecordsListQuery,
+  getMedicalRecordsListByPatientIdQuery,
+  addMedicalRecordQuery,
+};

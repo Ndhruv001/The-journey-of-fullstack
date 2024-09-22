@@ -1,12 +1,12 @@
 import {
   registerDoctorQuery,
   isEmailExist,
-  getDoctorsListQuery
+  getDoctorsListQuery,
 } from "../../queries/doctor/doctorQueries.js";
 import uploadOnCloudinary from "../../utils/cloudinary.js";
-import {formatDateForMySQL} from '../../utils/formatDateAndTime.js'
+import { formatDateForMySQL } from "../../utils/formatDateAndTime.js";
 import { capitalizeFirstLetter } from "../../utils/formatName.js";
-import { generateDoctorBio } from '../../utils/gemini.js'
+import { generateDoctorBio } from "../../utils/gemini.js";
 
 async function registerDoctor(req, res) {
   const {
@@ -26,14 +26,21 @@ async function registerDoctor(req, res) {
   const { profile_picture, identity_document, certification } = req.files;
 
   const isExist = await isEmailExist(email);
-  if(isExist){
-    return res.status(409).json({success: false, message: "Email is already exist"});
+  if (isExist) {
+    return res
+      .status(409)
+      .json({ success: false, message: "Email is already exist" });
   }
 
   const formatedName = capitalizeFirstLetter(name);
   const formatedDOB = formatDateForMySQL(dob);
 
-  const bio  = await generateDoctorBio({name, specialization, experience, education_detail})
+  const bio = await generateDoctorBio({
+    name,
+    specialization,
+    experience,
+    education_detail,
+  });
 
   try {
     // Upload files to Cloudinary
@@ -62,7 +69,7 @@ async function registerDoctor(req, res) {
       profile_picture: profilePictureUrl?.secure_url,
       identity_type,
       identity_document: identityDocumentUrl?.secure_url,
-      bio
+      bio,
     });
 
     res.status(201).json({
@@ -77,16 +84,20 @@ async function registerDoctor(req, res) {
   }
 }
 
-async function getDoctorsList(req, res){
+async function getDoctorsList(req, res) {
   try {
     const doctorsList = await getDoctorsListQuery();
-    return res.status(200).json({success: true, data: doctorsList})
+    return res.status(200).json({ success: true, data: doctorsList });
   } catch (error) {
     console.log("🚀 ~ getDoctorsList ~ error:", error);
-    res.status(500).json({success: false, message: "Internal server error", error: error.message || ""})
-    
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message || "",
+      });
   }
 }
-
 
 export { registerDoctor, getDoctorsList };

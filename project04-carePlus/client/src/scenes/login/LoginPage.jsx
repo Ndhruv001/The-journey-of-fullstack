@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { NavLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import Error from "@/components/Error";
-import axiosInstance from '@/lib/config/axiosInstance';
+import axiosInstance from "@/lib/config/axiosInstance";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
 import Button from "@/components/Button";
@@ -11,12 +11,31 @@ import { useState } from "react";
 
 function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const { mutate } = useMutation({
-    mutationFn: (data) => axiosInstance.post('user/auth/login', data),
-    onSuccess: () => {
-      toast.success("Login successful");
+    mutationFn: (data) => axiosInstance.post("user/auth/login", data),
+    onSuccess: (data) => {
+      toast.success("Login successful! Redirect to dashboard");
+
+      const {
+        data: { data: userType },
+      } = data;
+
+      setTimeout(() => {
+        if (userType === "patient") {
+          navigate("/patient");
+        } else if (userType === "doctor") {
+          navigate("/doctor");
+        } else if (userType === "admin") {
+          navigate("/admin");
+        }
+      }, 2000);
     },
     onError: (error) => {
       console.log("🚀~ FRONTEND ~ LoginPage ~ error:", error);
@@ -28,12 +47,12 @@ function LoginPage() {
     },
 
     onSettled: () => {
-      setIsSubmitting(false)
-    }
+      setIsSubmitting(false);
+    },
   });
 
   function onSubmit(data) {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     mutate(data);
   }
 
@@ -45,27 +64,26 @@ function LoginPage() {
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <Label>Email</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
+              id="email"
               placeholder="Enter your email"
-              bg="bg-gray-100"
-              rounded={false}
+              autoComplete="email"
               {...register("email", {
-                required: "Email should not be empty"
+                required: "Email should not be empty",
               })}
             />
-             <Error message={errors["email"]?.message} />
+            <Error message={errors["email"]?.message} />
           </div>
           <div className="mb-6">
-            <Label>Password</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
+              id="password"
               type="password"
               placeholder="Enter your password"
               autoComplete="password"
-              bg="bg-gray-100"
-              rounded={false}
               {...register("password", {
-                required: "Password should not be empty"
+                required: "Password should not be empty",
               })}
             />
             <Error message={errors["password"]?.message} />

@@ -49,21 +49,20 @@ function AdminAppointmentsOverview() {
     return <ErrorResponse error={error} />;
   }
 
- 
   const getStatusColorClass = (status) => {
     switch (status) {
       case "Scheduled":
-        return "text-green-600"; 
+        return "text-green-600";
       case "Cancelled":
-        return "text-orange-400"; 
+        return "text-orange-400";
       case "Pending":
-        return "text-yellow-500"; 
+        return "text-yellow-500";
       case "Rejected":
-        return "text-red-600"; 
+        return "text-red-600";
       case "Completed":
-        return "text-blue-600"
+        return "text-blue-600";
       default:
-        return ""; 
+        return "";
     }
   };
 
@@ -92,9 +91,9 @@ function AdminAppointmentsOverview() {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            
-            const status = row.original.status; 
-            const rowClass = getStatusColorClass(status); 
+
+            const status = row.original.status;
+            const rowClass = getStatusColorClass(status);
             return (
               <tr key={row.id} {...row.getRowProps()} className={rowClass}>
                 {row.cells.map((cell) => {

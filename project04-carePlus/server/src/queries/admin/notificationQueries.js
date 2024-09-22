@@ -28,7 +28,7 @@ async function markNotificationAsReadQuery({ notificationId }) {
       WHERE id = ?;`,
       [notificationId]
     );
-    return ;
+    return;
   } catch (error) {
     throw new Error(`Database Error: ${error}`);
   }

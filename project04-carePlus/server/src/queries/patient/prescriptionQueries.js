@@ -21,6 +21,4 @@ async function getPerscriptionsListQuery({ id }) {
   }
 }
 
-
-
 export { getPerscriptionsListQuery };

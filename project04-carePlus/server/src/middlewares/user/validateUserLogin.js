@@ -18,4 +18,4 @@ function userLoginValidationRules() {
   ];
 }
 
-export { userLoginValidationRules};
+export { userLoginValidationRules };
